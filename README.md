@@ -18,7 +18,7 @@ There will three ways to install the plugin.
 
 1. Download the code and build it.  Xcode will install the plugin in the right directory.  Restart Xcode.
 2. Download the plugin and place it in the ~/Library/Application Support/Developer/Shared/Xcode/Plug-ins directory.  Restart Xcode.
-3. (To come) Use the plugin Alcatraz to install.
+3. (To come) Use the plugin [Alcatraz](http://alcatraz.io) to install.
 
 # Why rewrite?  
 
