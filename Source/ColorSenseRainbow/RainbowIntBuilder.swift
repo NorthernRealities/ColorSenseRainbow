@@ -35,6 +35,14 @@ class RainbowIntBuilder: ColorBuilder {
             } else {
                 return nil
             }
+        } else if ( color.alphaComponent < 1.0 ) {
+            // User has changed the alpha so we need to add it to the code.
+            
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alphaValue: \(color.alphaComponent)" ) {
+                returnString = modifiedString
+            } else {
+                return nil
+            }
         }
         
         var component = Int ( round ( color.blueComponent * 255 ) )

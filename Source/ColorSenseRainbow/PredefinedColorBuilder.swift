@@ -68,11 +68,10 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
 
-        if ( ( forSearchResult.tcr.numberOfRanges == 4 ) || ( color.alphaComponent < 1.0 ) ) {
-            returnString += ", alpha: \(color.alphaComponent)"
-        }
         
-        returnString += ")"
+        // Always include the alpha component as it is impossible to tell if there is
+        // an extionsion to handle the creation of colours without it.
+        returnString += ", alpha: \(color.alphaComponent) )"
         
         return returnString
     }
