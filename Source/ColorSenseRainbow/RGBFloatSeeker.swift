@@ -17,8 +17,10 @@ class RGBFloatSeeker: Seeker {
         
         
         // Swift
+        // The values 0 and 1 are valid so everything after is optional.  The solution "\\.?[0-9]*" isn't optimal
+        // because the period could be specified without any digits after and a match be made or vice versa.
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]\\.?[0-9]*)\\s*,\\s*green:\\s*([01]\\.?[0-9]*)\\s*,\\s*blue:\\s*([01]\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift RGB float with alpha regex = \(error?.localizedDescription)" )
@@ -27,7 +29,7 @@ class RGBFloatSeeker: Seeker {
         }
         
         
-        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]\\.?[0-9]*)\\s*,\\s*green:\\s*([01]\\.?[0-9]*)\\s*,\\s*blue:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift RGB float without alpha regex = \(error?.localizedDescription)" )
@@ -36,7 +38,7 @@ class RGBFloatSeeker: Seeker {
         }
         
         
-        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([01]\\.?[0-9]*)\\s*,\\s*green:\\s*([01]\\.?[0-9]*)\\s*,\\s*blue:\\s*([01]\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift NSColor calibrated, device, SRGB float regex = \(error?.localizedDescription)" )

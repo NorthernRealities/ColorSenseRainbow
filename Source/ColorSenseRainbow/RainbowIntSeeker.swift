@@ -16,7 +16,7 @@ class RainbowIntSeeker: Seeker {
         var error : NSError?
         
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift Rainbow Integer with alphaValue regex = \(error?.localizedDescription)" )

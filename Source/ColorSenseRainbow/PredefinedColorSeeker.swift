@@ -1538,7 +1538,7 @@ class PredefinedColorSeeker : Seeker {
         
         // Swift color with predefined name and alpha value specified
         
-        var regex = NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*alpha:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        var regex = NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift predefined color with alpha regex = \(error?.localizedDescription)" )

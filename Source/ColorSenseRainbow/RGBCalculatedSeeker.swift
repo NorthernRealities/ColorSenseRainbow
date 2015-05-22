@@ -18,7 +18,7 @@ class RGBCalculatedSeeker: Seeker {
         
         // Swift
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift RGB calculated float with alpha regex = \(error?.localizedDescription)" )
@@ -36,7 +36,7 @@ class RGBCalculatedSeeker: Seeker {
         }
         
         
-        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Swift NSColor calibrated, device, SRGB calculated float regex = \(error?.localizedDescription)" )
