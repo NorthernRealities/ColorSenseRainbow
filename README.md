@@ -9,7 +9,7 @@ But with the plugin it becomes:
 
 ![Demo of the plugin](CSR_Demo.png)
 
-If you click on the color then a color picker is displayed.  As you choose colours the code is updated.  One thing to note is if you select a predefined colour and start changing the colour then the code gets changed to RGB values.  In the other cases I've tried to keep it as non-destructive as possible though at times the number of decimal places can change.  When the alpha isn't specified (it isn't required as part of the Rainbow library as I set it to a default value of 1.0) then the plugin doesn't add the alpha component to the code.  You'll have to do that manually.
+If you click on the color then a color picker is displayed.  As you choose colours the code is updated.  One thing to note is if you select a predefined colour and start changing the colour then the code gets changed to RGB values.  In the other cases I've tried to keep it as non-destructive as possible though at times the number of decimal places can change.  When the alpha isn't specified (it isn't required as part of the Rainbow library as I set it to a default value of 1.0) then the plugin doesn't add the alpha component to the code.  As of May 29, 2015 the plugin will now add the alpha component for you in Swift if you change the value in the colour picker.
 
 This project was inspired from [Color Sense for Xcode](https://github.com/omz/ColorSense-for-Xcode).  In fact it looks (and I think it behaves mostly) like it.  But I built it completely from scratch in Swift though I did use that project as a template for some items as I haven't done anything on the Mac side before.  
 
