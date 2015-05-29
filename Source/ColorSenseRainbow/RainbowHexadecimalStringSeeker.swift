@@ -36,7 +36,7 @@ class RainbowHexadecimalStringSeeker: Seeker {
     
     
     override func processMatch ( match : NSTextCheckingResult, line : String ) -> SearchResult? {
-        
+
         if ( ( match.numberOfRanges == 2 ) || ( match.numberOfRanges == 3 ) ) {
             var alphaValue : CGFloat = 1.0
             

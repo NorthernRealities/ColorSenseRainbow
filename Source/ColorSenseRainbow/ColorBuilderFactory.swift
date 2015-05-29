@@ -29,10 +29,10 @@ class ColorBuilderFactory {
             return PredefinedColorBuilder()
             
         case .RainbowHexString:
-            return RainbowHexBuilder()
+            return RainbowHexStringBuilder()
             
         case .RainbowHexInt:
-            return RainbowHexBuilder()
+            return RainbowHexIntBuilder()
             
         case .RainbowInt:
             return RainbowIntBuilder()

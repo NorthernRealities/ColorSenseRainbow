@@ -23,7 +23,7 @@ class Seeker {
     */
     
     func searchForColor ( line : String, selectedRange : NSRange ) -> SearchResult? {
-        
+
         for regex in ( regexes ) {
             let range = NSMakeRange( 0, count ( line ) )
 
