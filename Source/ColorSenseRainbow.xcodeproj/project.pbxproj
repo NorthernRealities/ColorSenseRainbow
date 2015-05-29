@@ -18,7 +18,7 @@
 		564C22F51AEC127E0098E933 /* ColorBuilderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22F41AEC127E0098E933 /* ColorBuilderFactory.swift */; };
 		564C22F91AEC791C0098E933 /* ColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22F81AEC791C0098E933 /* ColorBuilder.swift */; };
 		564C22FB1AEC79370098E933 /* DefaultRGBBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22FA1AEC79370098E933 /* DefaultRGBBuilder.swift */; };
-		564C22FD1AEE833B0098E933 /* RainbowHexBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22FC1AEE833B0098E933 /* RainbowHexBuilder.swift */; };
+		564C22FD1AEE833B0098E933 /* RainbowHexStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22FC1AEE833B0098E933 /* RainbowHexStringBuilder.swift */; };
 		564C22FF1AEE84CC0098E933 /* NSColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C22FE1AEE84CC0098E933 /* NSColor+HexString.swift */; };
 		5662361A1AE9391100BABC79 /* RainbowHexadecimalStringSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566236191AE9391100BABC79 /* RainbowHexadecimalStringSeeker.swift */; };
 		5662361C1AE940AF00BABC79 /* RainbowHexadecimalIntSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662361B1AE940AF00BABC79 /* RainbowHexadecimalIntSeeker.swift */; };
@@ -31,6 +31,7 @@
 		56D014621AEEBEED005624AF /* NSRange+RangeForString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D014611AEEBEED005624AF /* NSRange+RangeForString.swift */; };
 		56D014641AF04131005624AF /* RainbowIntBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D014631AF04131005624AF /* RainbowIntBuilder.swift */; };
 		56D014681AF11C1F005624AF /* PredefinedColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D014671AF11C1F005624AF /* PredefinedColorBuilder.swift */; };
+		56F4E9E41B1624210083699A /* RainbowHexIntBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F4E9E31B1624210083699A /* RainbowHexIntBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +46,7 @@
 		564C22F41AEC127E0098E933 /* ColorBuilderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBuilderFactory.swift; sourceTree = "<group>"; };
 		564C22F81AEC791C0098E933 /* ColorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBuilder.swift; sourceTree = "<group>"; };
 		564C22FA1AEC79370098E933 /* DefaultRGBBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRGBBuilder.swift; sourceTree = "<group>"; };
-		564C22FC1AEE833B0098E933 /* RainbowHexBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowHexBuilder.swift; sourceTree = "<group>"; };
+		564C22FC1AEE833B0098E933 /* RainbowHexStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowHexStringBuilder.swift; sourceTree = "<group>"; };
 		564C22FE1AEE84CC0098E933 /* NSColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+HexString.swift"; sourceTree = "<group>"; };
 		566236191AE9391100BABC79 /* RainbowHexadecimalStringSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowHexadecimalStringSeeker.swift; sourceTree = "<group>"; };
 		5662361B1AE940AF00BABC79 /* RainbowHexadecimalIntSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowHexadecimalIntSeeker.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		56D014611AEEBEED005624AF /* NSRange+RangeForString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+RangeForString.swift"; sourceTree = "<group>"; };
 		56D014631AF04131005624AF /* RainbowIntBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowIntBuilder.swift; sourceTree = "<group>"; };
 		56D014671AF11C1F005624AF /* PredefinedColorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredefinedColorBuilder.swift; sourceTree = "<group>"; };
+		56F4E9E31B1624210083699A /* RainbowHexIntBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowHexIntBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -97,7 +99,8 @@
 				564C22FA1AEC79370098E933 /* DefaultRGBBuilder.swift */,
 				56D014671AF11C1F005624AF /* PredefinedColorBuilder.swift */,
 				56D014631AF04131005624AF /* RainbowIntBuilder.swift */,
-				564C22FC1AEE833B0098E933 /* RainbowHexBuilder.swift */,
+				56F4E9E31B1624210083699A /* RainbowHexIntBuilder.swift */,
+				564C22FC1AEE833B0098E933 /* RainbowHexStringBuilder.swift */,
 			);
 			name = ColorBuilders;
 			sourceTree = "<group>";
@@ -133,12 +136,12 @@
 		56B480DD1AE2D6CC00B507E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5662361D1AE9420000BABC79 /* Rainbow-Creator.swift */,
-				56B480E81AE2D73500B507E4 /* NSColor+Rainbow.swift */,
 				56B480DE1AE2D6CC00B507E4 /* Info.plist */,
 				56B480DF1AE2D6CC00B507E4 /* ColorSenseRainbow.xcscheme */,
 				564C22FE1AEE84CC0098E933 /* NSColor+HexString.swift */,
+				56B480E81AE2D73500B507E4 /* NSColor+Rainbow.swift */,
 				56D014611AEEBEED005624AF /* NSRange+RangeForString.swift */,
+				5662361D1AE9420000BABC79 /* Rainbow-Creator.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -219,11 +222,12 @@
 				566236221AE9830800BABC79 /* RGBCalculatedSeeker.swift in Sources */,
 				564C22F51AEC127E0098E933 /* ColorBuilderFactory.swift in Sources */,
 				5609BEEB1AE544F500DF2D5B /* RainbowIntSeeker.swift in Sources */,
-				564C22FD1AEE833B0098E933 /* RainbowHexBuilder.swift in Sources */,
+				564C22FD1AEE833B0098E933 /* RainbowHexStringBuilder.swift in Sources */,
 				5609BEE01AE4184F00DF2D5B /* SearchResult.swift in Sources */,
 				5609BEE71AE46AC600DF2D5B /* ColorFrameView.swift in Sources */,
 				56D014641AF04131005624AF /* RainbowIntBuilder.swift in Sources */,
 				5662361C1AE940AF00BABC79 /* RainbowHexadecimalIntSeeker.swift in Sources */,
+				56F4E9E41B1624210083699A /* RainbowHexIntBuilder.swift in Sources */,
 				5662361E1AE9420000BABC79 /* Rainbow-Creator.swift in Sources */,
 				56B480E91AE2D73500B507E4 /* NSColor+Rainbow.swift in Sources */,
 				563133FA1AF3EF58005494E2 /* CalculatedRGBBuilder.swift in Sources */,
