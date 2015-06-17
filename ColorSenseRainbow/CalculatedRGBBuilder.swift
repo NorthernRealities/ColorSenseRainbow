@@ -33,11 +33,13 @@ class CalculatedRGBBuilder: ColorBuilder {
         }
         
         var numberFormatter = NSNumberFormatter()
+		numberFormatter.locale = NSLocale(localeIdentifier: "us")
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = 1  // Don't need as many digits here.
         numberFormatter.minimumFractionDigits = 1
         
         var stringFormatter = NSNumberFormatter()
+		numberFormatter.locale = NSLocale(localeIdentifier: "us")
         stringFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
         

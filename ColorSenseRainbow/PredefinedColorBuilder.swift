@@ -40,6 +40,8 @@ class PredefinedColorBuilder: ColorBuilder {
     private func createSwiftColor ( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
         var numberFormatter = NSNumberFormatter()
+		numberFormatter.locale = NSLocale(localeIdentifier: "us")
+
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
         numberFormatter.minimumFractionDigits = 1
@@ -80,6 +82,8 @@ class PredefinedColorBuilder: ColorBuilder {
     private func createObjCColor ( color : NSColor, forSearchResult : SearchResult ) -> String? {
 
         var numberFormatter = NSNumberFormatter()
+		numberFormatter.locale = NSLocale(localeIdentifier: "us")
+
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
         

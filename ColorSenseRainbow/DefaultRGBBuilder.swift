@@ -30,6 +30,8 @@ class DefaultRGBBuilder: ColorBuilder {
         }
         
         var numberFormatter = NSNumberFormatter()
+		numberFormatter.locale = NSLocale(localeIdentifier: "us")
+
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
         numberFormatter.minimumFractionDigits = 1
