@@ -14,7 +14,7 @@ If you click on the color then a color picker is displayed.  As you choose colou
 This project was inspired from [Color Sense for Xcode](https://github.com/omz/ColorSense-for-Xcode).  In fact it looks (and I think it behaves mostly) like it.  But I built it completely from scratch in Swift though I did use that project as a template for some items as I haven't done anything on the Mac side before.  
 
 # Installing
-There will three ways to install the plugin.
+There will be three ways to install the plugin.
 
 1. Download the code and build it.  Xcode will install the plugin in the right directory.  Restart Xcode.
 2. Download the plugin and place it in the ~/Library/Application Support/Developer/Shared/Xcode/Plug-ins directory.  Restart Xcode.
