@@ -50,7 +50,7 @@ class RGBFloatSeeker: Seeker {
         
         // Objective-C - Only functions with alpha defined
 
-        regex = NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*([01]\\.[0-9]+)f?\\s*green:\\s*([01]\\.[0-9]+)f?\\s*blue:\\s*([01]\\.[0-9]+)f?\\s*alpha:\\s*([01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
+        regex = NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*([01]|[01]\\.[0-9]+)f?\\s*green:\\s*([01]|[01]\\.[0-9]+)f?\\s*blue:([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
         
         if regex == nil {
             println ( "Error creating Objective-C RGB float with alpha regex = \(error?.localizedDescription)" )
