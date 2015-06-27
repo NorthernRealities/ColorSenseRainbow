@@ -37,11 +37,12 @@ class CalculatedRGBBuilder: ColorBuilder {
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = 1  // Don't need as many digits here.
         numberFormatter.minimumFractionDigits = 1
+        numberFormatter.decimalSeparator = "." // Users, with another locales have "," separating decimals
         
         var stringFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
         stringFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        
+        stringFormatter.decimalSeparator = numberFormatter.decimalSeparator
         
         if ( forSearchResult.tcr.numberOfRanges == 8 ) {
             if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 7, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {

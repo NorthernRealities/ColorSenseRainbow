@@ -35,7 +35,7 @@ class DefaultRGBBuilder: ColorBuilder {
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
         numberFormatter.minimumFractionDigits = 1
-
+        numberFormatter.decimalSeparator = "."
         
         if ( forSearchResult.tcr.numberOfRanges == 5 ) {
             if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {
