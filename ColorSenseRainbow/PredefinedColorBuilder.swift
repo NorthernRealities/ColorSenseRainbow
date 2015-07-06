@@ -87,6 +87,8 @@ class PredefinedColorBuilder: ColorBuilder {
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.minimumFractionDigits = 1
+        numberFormatter.decimalSeparator = "."
         
         var returnString = "["
         returnString += colorStringForType( forSearchResult.colorType )
