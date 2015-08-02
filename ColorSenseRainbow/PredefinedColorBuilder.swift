@@ -92,7 +92,7 @@ class PredefinedColorBuilder: ColorBuilder {
         
         var returnString = "["
         returnString += colorStringForType( forSearchResult.colorType )
-        returnString += "Color colorWithRed: "
+        returnString += "Color colorWithRed:"
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.redComponent ) ) {
             returnString += modifiedString
         } else {
@@ -100,7 +100,7 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
         
-        returnString += " green: "
+        returnString += " green:"
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.greenComponent ) ) {
             returnString += modifiedString
         } else {
@@ -108,7 +108,7 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
         
-        returnString += " blue: "
+        returnString += " blue:"
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.blueComponent ) ) {
             returnString += modifiedString
         } else {
@@ -116,7 +116,7 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
         
-        returnString += " alpha: \(color.alphaComponent)]"
+        returnString += " alpha:\(color.alphaComponent)]"
                 
         return returnString
 }
