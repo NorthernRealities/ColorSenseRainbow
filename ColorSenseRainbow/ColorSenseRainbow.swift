@@ -162,7 +162,7 @@ class ColorSenseRainbow: NSObject {
                     
                     
                     if var searchResult = colorFinder.searchForColor( line, selectedRange: selectedRangeInLine ) {
-                        if let backgroundColor = textView.backgroundColor.colorUsingColorSpace( NSColorSpace.deviceRGBColorSpace() ) {
+                        if let backgroundColor = textView.backgroundColor.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) {
                             
                             let backgroundLuminance = ( backgroundColor.redComponent + backgroundColor.greenComponent + backgroundColor.blueComponent ) / 3.0
                             
@@ -387,7 +387,7 @@ class ColorSenseRainbow: NSObject {
         if let  sr = searchResults[ textView ],
                 builder = cbc.builderForCreationType( sr ),
                 colorWell = colorWells[ textView ],
-                color = colorWell.color.colorUsingColorSpace( NSColorSpace.deviceRGBColorSpace() ),
+                color = colorWell.color.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ),
                 newColorString = builder.stringForColor( color, forSearchResult: sr ) {
                 
             textView.undoManager?.beginUndoGrouping()

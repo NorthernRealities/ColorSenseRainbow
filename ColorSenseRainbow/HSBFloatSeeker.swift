@@ -50,7 +50,7 @@ class HSBFloatSeeker: Seeker {
         }
         
         
-        // Don't care about saving the Calibrated, Device, or SRGB since we assume that any function that
+        // Don't care about saving the Calibrated or Device since we assume that any function that
         // replace the values will do so selectively instead of overwriting the whole string.
         
         regex = NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device)Hue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
@@ -86,9 +86,9 @@ class HSBFloatSeeker: Seeker {
             let saturationValue = CGFloat ( ( saturationString as NSString).doubleValue )
             let brightnessValue = CGFloat ( ( brightnessString as NSString).doubleValue )
             
-            let hueColor = NSColor ( deviceHue: hueValue, saturation: saturationValue, brightness: brightnessValue, alpha: alphaValue )
+            let hueColor = NSColor ( calibratedHue: hueValue, saturation: saturationValue, brightness: brightnessValue, alpha: alphaValue )
             
-            if let rgbColor = hueColor.colorUsingColorSpace( NSColorSpace.deviceRGBColorSpace() ) {
+            if let rgbColor = hueColor.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) {
                 // If not converted to RGB ColorSpace then the plugin would crash later on.
             
                 var searchResult = SearchResult ( color: rgbColor, textCheckingResult: match, capturedStrings: capturedStrings )

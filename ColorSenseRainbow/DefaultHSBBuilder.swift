@@ -38,10 +38,10 @@ class DefaultHSBBuilder: ColorBuilder {
         numberFormatter.decimalSeparator = "."
         
         
-        // First thing to do is to convert the color to the Device RGB ColorSpace.
+        // First thing to do is to convert the color to the Calibrated RGB ColorSpace.
         // It should be but we do the conversion just in case or else it will raise an exception.
         
-        if let hueColor = color.colorUsingColorSpace( NSColorSpace.deviceRGBColorSpace() ) {
+        if let hueColor = color.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) {
         
             // While it always has an alpha component there may be an extension at a later date that
             // removes it so keep this in there.  It doesn't hurt.
@@ -100,7 +100,7 @@ class DefaultHSBBuilder: ColorBuilder {
             return returnString
         }
         
-        println ( "Error converting the color to deviceRGB colorspace." )
+        println ( "Error converting the color to genericRGB colorspace." )
         return nil
 
     }

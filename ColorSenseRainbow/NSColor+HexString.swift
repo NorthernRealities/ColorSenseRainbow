@@ -25,7 +25,7 @@ extension NSColor {
         // Need to convert the color to RGB if not already.
         
         if ( self.colorSpace != NSCalibratedRGBColorSpace ) && ( self.colorSpace != NSDeviceRGBColorSpace ) {
-            if let convertedColor = self.colorUsingColorSpace( NSColorSpace.deviceRGBColorSpace() ) {
+            if let convertedColor = self.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) {
                 color = convertedColor
             }
             else {
