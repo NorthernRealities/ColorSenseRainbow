@@ -40,6 +40,9 @@ class ColorBuilderFactory {
         case .DefaultRGB:
             return DefaultRGBBuilder()
             
+        case .DefaultHSB:
+            return DefaultHSBBuilder()
+            
         case .Unknown:
             return nil
         }

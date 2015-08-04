@@ -16,7 +16,8 @@ class ColorFinder : Printable {
         PredefinedColorSeeker(),
         RainbowIntSeeker(),
         RainbowHexadecimalStringSeeker(),
-        RainbowHexadecimalIntSeeker()
+        RainbowHexadecimalIntSeeker(),
+        HSBFloatSeeker()
     ]
     
     var description : String {

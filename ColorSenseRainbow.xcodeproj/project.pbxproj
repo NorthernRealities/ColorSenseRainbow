@@ -25,6 +25,8 @@
 		5662361E1AE9420000BABC79 /* Rainbow-Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662361D1AE9420000BABC79 /* Rainbow-Creator.swift */; };
 		566236201AE97CCB00BABC79 /* RGBFloatSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662361F1AE97CCB00BABC79 /* RGBFloatSeeker.swift */; };
 		566236221AE9830800BABC79 /* RGBCalculatedSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566236211AE9830800BABC79 /* RGBCalculatedSeeker.swift */; };
+		566FFA7B1B6E9A8900F4EBA6 /* HSBFloatSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FFA7A1B6E9A8900F4EBA6 /* HSBFloatSeeker.swift */; };
+		566FFA7D1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FFA7C1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift */; };
 		56B480E01AE2D6CC00B507E4 /* ColorSenseRainbow.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 56B480DF1AE2D6CC00B507E4 /* ColorSenseRainbow.xcscheme */; };
 		56B480E21AE2D6CC00B507E4 /* ColorSenseRainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B480E11AE2D6CC00B507E4 /* ColorSenseRainbow.swift */; };
 		56B480E91AE2D73500B507E4 /* NSColor+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B480E81AE2D73500B507E4 /* NSColor+Rainbow.swift */; };
@@ -53,6 +55,8 @@
 		5662361D1AE9420000BABC79 /* Rainbow-Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rainbow-Creator.swift"; sourceTree = "<group>"; };
 		5662361F1AE97CCB00BABC79 /* RGBFloatSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBFloatSeeker.swift; sourceTree = "<group>"; };
 		566236211AE9830800BABC79 /* RGBCalculatedSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBCalculatedSeeker.swift; sourceTree = "<group>"; };
+		566FFA7A1B6E9A8900F4EBA6 /* HSBFloatSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSBFloatSeeker.swift; sourceTree = "<group>"; };
+		566FFA7C1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHSBBuilder.swift; sourceTree = "<group>"; };
 		56B480DA1AE2D6CC00B507E4 /* ColorSenseRainbow.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorSenseRainbow.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B480DE1AE2D6CC00B507E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B480DF1AE2D6CC00B507E4 /* ColorSenseRainbow.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ColorSenseRainbow.xcscheme; path = ColorSenseRainbow.xcodeproj/xcshareddata/xcschemes/ColorSenseRainbow.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -84,6 +88,7 @@
 				5662361B1AE940AF00BABC79 /* RainbowHexadecimalIntSeeker.swift */,
 				566236191AE9391100BABC79 /* RainbowHexadecimalStringSeeker.swift */,
 				5609BEEA1AE544F500DF2D5B /* RainbowIntSeeker.swift */,
+				566FFA7A1B6E9A8900F4EBA6 /* HSBFloatSeeker.swift */,
 				5662361F1AE97CCB00BABC79 /* RGBFloatSeeker.swift */,
 				566236211AE9830800BABC79 /* RGBCalculatedSeeker.swift */,
 				5609BEE11AE41A1500DF2D5B /* Seeker.swift */,
@@ -97,6 +102,7 @@
 				563133F91AF3EF58005494E2 /* CalculatedRGBBuilder.swift */,
 				564C22F81AEC791C0098E933 /* ColorBuilder.swift */,
 				564C22FA1AEC79370098E933 /* DefaultRGBBuilder.swift */,
+				566FFA7C1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift */,
 				56D014671AF11C1F005624AF /* PredefinedColorBuilder.swift */,
 				56D014631AF04131005624AF /* RainbowIntBuilder.swift */,
 				56F4E9E31B1624210083699A /* RainbowHexIntBuilder.swift */,
@@ -214,6 +220,7 @@
 			files = (
 				56B480E21AE2D6CC00B507E4 /* ColorSenseRainbow.swift in Sources */,
 				56D014681AF11C1F005624AF /* PredefinedColorBuilder.swift in Sources */,
+				566FFA7B1B6E9A8900F4EBA6 /* HSBFloatSeeker.swift in Sources */,
 				5609BEE41AE460D000DF2D5B /* PredefinedColorSeeker.swift in Sources */,
 				566236201AE97CCB00BABC79 /* RGBFloatSeeker.swift in Sources */,
 				564C22F91AEC791C0098E933 /* ColorBuilder.swift in Sources */,
@@ -236,6 +243,7 @@
 				564C22FF1AEE84CC0098E933 /* NSColor+HexString.swift in Sources */,
 				5609BEDE1AE417CE00DF2D5B /* ColorFinder.swift in Sources */,
 				56D014621AEEBEED005624AF /* NSRange+RangeForString.swift in Sources */,
+				566FFA7D1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
