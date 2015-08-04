@@ -37,10 +37,10 @@ The classes that replace the code with the new color information parse the strin
 
 Assuming that you want to extend the plugin and it isn't for something simple like the above then you are going to need to a bit more work.  But hopefully not too much.  The following are the steps I would take to add the handling of the creation of colours using hue, saturation, and brightness (HSB).  When overriding a function metioned below take a look at the other classes as a template.  They all follow a similar pattern.
 
-* Add a value to the CSRColorCreationType
+* Add a value to the CSRColorCreationType in the SearchResult class
 * Create a new Seeker subclass
 * Override the init method to define the regular expressions needed
-* Override the processMatch method to store values when a match is made and create the color. (While you would create the color with HSB values you would want to get a copy of the color in the RGB colorspace as later on the plugin assumes the color is in that colorspace.  It **will crash** if you don't do this!)
+* Override the processMatch method to store values when a match is made and create the color. Remember to change the creation type of the search result to the value you made in the first step. (While you would create the color with HSB values you would want to get a copy of the color in the RGB colorspace as later on the plugin assumes the color is in that colorspace.  It **will crash** if you don't do this!)
 * Add the new Seeker subclass object to the array found in ColorFinder.  It's probably best to do this at the end for performance reasons.  The most common ways to define colours should be at the front so they are found first reducing the amount of searching to be done.
 * Create a new subclass of ColorBuilder
 * Override the function stringForColor
