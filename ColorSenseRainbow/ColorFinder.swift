@@ -14,6 +14,7 @@ class ColorFinder : Printable {
         RGBCalculatedSeeker(),
         RGBFloatSeeker(),
         PredefinedColorSeeker(),
+        WhiteSeeker(),
         RainbowIntSeeker(),
         RainbowHexadecimalStringSeeker(),
         RainbowHexadecimalIntSeeker(),

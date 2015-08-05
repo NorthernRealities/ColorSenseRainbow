@@ -16,6 +16,7 @@ enum CSRColorCreationType {
     case RainbowHexString   // Using the Rainbow convenience method of a hexadecimal string
     case RainbowInt         // Rainbow convenience method using integers
     case DefaultHSB         // HSB with floating point values between 0 and 1
+    case DefaultWhite       // Greyscale with floating point values between 0 and 1
     case DefaultRGB         // RGB with floating point values between 0 and 1
 }
 

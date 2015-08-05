@@ -28,6 +28,9 @@ class ColorBuilderFactory {
         case .PredefinedColor:
             return PredefinedColorBuilder()
             
+        case .DefaultWhite:
+            return DefaultWhiteBuilder()
+            
         case .RainbowHexString:
             return RainbowHexStringBuilder()
             
