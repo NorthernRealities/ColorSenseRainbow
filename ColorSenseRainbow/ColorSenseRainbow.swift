@@ -182,22 +182,23 @@ class ColorSenseRainbow: NSObject {
                             
                             let selectedColorRange = NSMakeRange( searchResult.tcr.range.location + lineRange.location, searchResult.tcr.range.length )
                             let selectionRectOnScreen = textView.firstRectForCharacterRange( selectedColorRange, actualRange: nil )
-                            let selectionRectInWindow = textView.window?.convertRectFromScreen( selectionRectOnScreen )
-                            let selectionRectInView = textView.convertRect( selectionRectInWindow!, fromView: nil )
-                            let colorWellRect = NSMakeRect( NSMaxX ( selectionRectInView ) - 49, NSMinY( selectionRectInView ) - selectionRectInView.size.height - 2, 50, selectionRectInView.size.height + 2 )
-                            
-                            colorWell.frame = NSIntegralRect( colorWellRect )
-                            colorWell.target = self
-                            colorWell.action = NSSelectorFromString( "colorChanged:" )
-                            
-                            addColorWell( colorWell, toTextView: textView )
-                            
-                            
-                            var colorFrame = ColorFrameView()
-                            colorFrame.frame = NSInsetRect( NSIntegralRect( selectionRectInView ), -1, -1 )
-                            colorFrame.color = borderColor
-                            
-                            addColorFrame( colorFrame, toTextView: textView )
+                            if let selectionRectInWindow = textView.window?.convertRectFromScreen( selectionRectOnScreen ) {
+                                let selectionRectInView = textView.convertRect( selectionRectInWindow, fromView: nil )
+                                let colorWellRect = NSMakeRect( NSMaxX ( selectionRectInView ) - 49, NSMinY( selectionRectInView ) - selectionRectInView.size.height - 2, 50, selectionRectInView.size.height + 2 )
+
+                                colorWell.frame = NSIntegralRect( colorWellRect )
+                                colorWell.target = self
+                                colorWell.action = NSSelectorFromString( "colorChanged:" )
+
+                                addColorWell( colorWell, toTextView: textView )
+
+
+                                var colorFrame = ColorFrameView()
+                                colorFrame.frame = NSInsetRect( NSIntegralRect( selectionRectInView ), -1, -1 )
+                                colorFrame.color = borderColor
+
+                                addColorFrame( colorFrame, toTextView: textView )
+                            }
 
                             searchResult.rangeInTextView = selectedColorRange
                             searchResults[ textView ] = searchResult
