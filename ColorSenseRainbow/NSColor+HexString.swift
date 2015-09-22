@@ -14,7 +14,7 @@ extension NSColor {
     /**
     Returns a string representing the color as a hexadecimal value of the format AABBCC where AA represents the red component, BB is the green component, and CC is the blue component in the RGB system.  Each character can be from 0-9 or A-F.
     
-    :returns: A String with the hexadecimal representation or "FFFFFF" if an error happened.
+    - returns: A String with the hexadecimal representation or "FFFFFF" if an error happened.
     */
     
     func asHexString () -> String {
@@ -43,13 +43,13 @@ extension NSColor {
             
             var hexString = String ( Int ( round ( value * 255 ) ), radix: 16, uppercase: true )
             
-            if ( count( hexString ) == 1 ) {
+            if ( hexString.characters.count == 1 ) {
                 hexString = "0\(hexString)"
             }
             
             return hexString
         }
         
-        return "".join( stringArray )
+        return stringArray.joinWithSeparator( "" )
     }
 }

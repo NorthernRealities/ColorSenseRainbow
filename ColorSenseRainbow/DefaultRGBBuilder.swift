@@ -13,10 +13,10 @@ class DefaultRGBBuilder: ColorBuilder {
     /**
     Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
     
-    :param: color            The new color that will be described by the string.
-    :param: forSearchResults A SearchResults object containing the ranges for text to replace.
+    - parameter color:            The new color that will be described by the string.
+    - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
     
-    :returns: A String object containing code how to create the color.
+    - returns: A String object containing code how to create the color.
     */
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
@@ -29,7 +29,7 @@ class DefaultRGBBuilder: ColorBuilder {
             return nil
         }
         
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
@@ -61,7 +61,7 @@ class DefaultRGBBuilder: ColorBuilder {
                 return nil
             }
         } else {
-            println ( "Error converting blue component with value of \(color.blueComponent) to a string." )
+            print ( "Error converting blue component with value of \(color.blueComponent) to a string." )
             return nil
         }
 
@@ -72,7 +72,7 @@ class DefaultRGBBuilder: ColorBuilder {
                 return nil
             }
         } else {
-            println ( "Error converting green component with value of \(color.greenComponent) to a string." )
+            print ( "Error converting green component with value of \(color.greenComponent) to a string." )
             return nil
         }
         
@@ -83,7 +83,7 @@ class DefaultRGBBuilder: ColorBuilder {
                 return nil
             }
         } else {
-            println ( "Error converting red component with value of \(color.redComponent) to a string." )
+            print ( "Error converting red component with value of \(color.redComponent) to a string." )
             return nil
         }
         

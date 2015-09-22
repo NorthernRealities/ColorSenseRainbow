@@ -17,7 +17,7 @@ class BorderedColorWell: NSColorWell {
         
         NSGraphicsContext.saveGraphicsState()
         
-        var path = NSBezierPath ( roundedRect: NSMakeRect( 0, -5, self.bounds.size.width, self.bounds.size.height + 5), xRadius: 5.0, yRadius: 5.0 )
+        let path = NSBezierPath ( roundedRect: NSMakeRect( 0, -5, self.bounds.size.width, self.bounds.size.height + 5), xRadius: 5.0, yRadius: 5.0 )
         
         path.addClip()
         drawWellInside( self.bounds )
@@ -26,7 +26,7 @@ class BorderedColorWell: NSColorWell {
         
         
         if ( borderColor != nil ) {
-            var borderPath = NSBezierPath ( roundedRect: NSInsetRect( NSMakeRect( 0, -5, self.bounds.size.width, self.bounds.size.height + 5), 0.5, 0.5 ) , xRadius: 5.0, yRadius: 5.0 )
+            let borderPath = NSBezierPath ( roundedRect: NSInsetRect( NSMakeRect( 0, -5, self.bounds.size.width, self.bounds.size.height + 5), 0.5, 0.5 ) , xRadius: 5.0, yRadius: 5.0 )
             borderColor.setStroke()
             borderPath.stroke()
         }

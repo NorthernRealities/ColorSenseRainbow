@@ -20,43 +20,64 @@ class HSBFloatSeeker: Seeker {
         // The values 0 and 1 are valid so everything after is optional.  The solution "\\.?[0-9]*" isn't optimal
         // because the period could be specified without any digits after and a match be made or vice versa.
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+    var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift HSB float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift HSB float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device)Hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+        do {
+            regex = try NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device)Hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift NSColor calibrated, device HSB float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift NSColor calibrated, device HSB float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
         
-        // Objective-C - Only functions with alpha defined
+        do {
+            // Objective-C - Only functions with alpha defined
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithHue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithHue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C HSB float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C HSB float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        // Don't care about saving the Calibrated or Device since we assume that any function that
-        // replace the values will do so selectively instead of overwriting the whole string.
+        do {
+            // Don't care about saving the Calibrated or Device since we assume that any function that
+            // replace the values will do so selectively instead of overwriting the whole string.
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device)Hue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device)Hue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C calibrated, device HSB calculated float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C calibrated, device HSB calculated float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }

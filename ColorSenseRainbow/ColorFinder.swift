@@ -8,7 +8,7 @@
 
 import AppKit
 
-class ColorFinder : Printable {
+class ColorFinder : CustomStringConvertible {
     
     var seekers : [ Seeker ] = [
         RGBCalculatedSeeker(),

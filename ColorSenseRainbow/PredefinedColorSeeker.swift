@@ -26,7 +26,7 @@ class PredefinedColorSeeker : Seeker {
         "purple" : NSColor.purpleColor(),
         "red" : NSColor.redColor(),
         "yellow" : NSColor.yellowColor(),
-        "acidGreen" : NSColor.acidGreenColor(alpha: 1.0 ),
+        "acidGreen" : NSColor.acidGreenColor(1.0 ),
         "aero" : NSColor.aeroColor(),
         "aeroBlue" : NSColor.aeroBlueColor(),
         "africanViolet" : NSColor.africanVioletColor(),
@@ -1538,43 +1538,64 @@ class PredefinedColorSeeker : Seeker {
         
         // Swift color with predefined name and alpha value specified
         
-        var regex = NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
+    var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift predefined color with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift predefined color with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
 
         
-        // Swift color with predefined name and no alpha
+        do {
+            // Swift color with predefined name and no alpha
         
-        regex = NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\s*\\(\\s*\\)", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\s*\\(\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
             
         if regex == nil {
-            println ( "Error creating Swift predefined color without alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift predefined color without alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        // Objective-C color with predefined name with alpha
+        do {
+            // Objective-C color with predefined name with alpha
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)ColorWithAlpha:\\s*([01]\\.[0-9]+)\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)ColorWithAlpha:\\s*([01]\\.[0-9]+)\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C predefined color regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C predefined color regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
 
         
-        // Objective-C color with predefined name and no alpha
+        do {
+            // Objective-C color with predefined name and no alpha
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)Color\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)Color\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C predefined color with no alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C predefined color with no alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }

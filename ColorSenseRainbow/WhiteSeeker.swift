@@ -20,54 +20,75 @@ class WhiteSeeker: Seeker {
         // The values 0 and 1 are valid so everything after is optional.  The solution "\\.?[0-9]*" isn't optimal
         // because the period could be specified without any digits after and a match be made or vice versa.
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*white:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+    var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*white:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift White float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift White float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        // Not used but kept here in case I create an extension that provides a default for the alpha.
+        do {
+            // Not used but kept here in case I create an extension that provides a default for the alpha.
         
-//        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*white:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
-//        
-//        if regex == nil {
-//            println ( "Error creating Swift White float without alpha regex = \(error?.localizedDescription)" )
-//        } else {
-//            regexes.append( regex! )
-//        }
+    //        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*white:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+    //        
+    //        if regex == nil {
+    //            println ( "Error creating Swift White float without alpha regex = \(error?.localizedDescription)" )
+    //        } else {
+    //            regexes.append( regex! )
+    //        }
         
-        
-        regex = NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|genericGamma22)White:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: .allZeros, error: &error )
+            
+            regex = try NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|genericGamma22)White:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift NSColor calibrated, device, genericGamma22 white float regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift NSColor calibrated, device, genericGamma22 white float regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
         
-        // Objective-C - Only functions with alpha defined
+        do {
+            // Objective-C - Only functions with alpha defined
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithWhite:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithWhite:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C White float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C White float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        // Don't care about saving the Calibrated, Device, or genericGamma22 since we assume that any function that
-        // replace the values will do so selectively instead of overwriting the whole string.
+        do {
+            // Don't care about saving the Calibrated, Device, or genericGamma22 since we assume that any function that
+            // replace the values will do so selectively instead of overwriting the whole string.
         
-        regex = NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|GenericGamma22)White:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: .allZeros, error: &error )
+            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|GenericGamma22)White:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Objective-C calibrated, device, genericGamma22 white float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C calibrated, device, genericGamma22 white float with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }

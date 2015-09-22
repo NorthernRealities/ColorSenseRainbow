@@ -35,7 +35,7 @@ enum CSRProgrammingLanguage {
 }
 
 
-struct SearchResult : Printable {
+struct SearchResult : CustomStringConvertible {
     var creationType : CSRColorCreationType
     var colorType : CSRColorType
     var language : CSRProgrammingLanguage

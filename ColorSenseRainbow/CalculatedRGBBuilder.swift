@@ -16,10 +16,10 @@ class CalculatedRGBBuilder: ColorBuilder {
     /**
     Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
     
-    :param: color            The new color that will be described by the string.
-    :param: forSearchResults A SearchResults object containing the ranges for text to replace.
+    - parameter color:            The new color that will be described by the string.
+    - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
     
-    :returns: A String object containing code how to create the color.
+    - returns: A String object containing code how to create the color.
     */
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
@@ -32,14 +32,14 @@ class CalculatedRGBBuilder: ColorBuilder {
             return nil
         }
         
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         numberFormatter.maximumFractionDigits = 1  // Don't need as many digits here.
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "." // Users, with another locales have "," separating decimals
         
-        var stringFormatter = NSNumberFormatter()
+        let stringFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
         stringFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         stringFormatter.decimalSeparator = numberFormatter.decimalSeparator
@@ -70,11 +70,11 @@ class CalculatedRGBBuilder: ColorBuilder {
                     return nil
                 }
             } else {
-                println ( "Error converting color blue component of \(color.blueComponent) to a string." )
+                print ( "Error converting color blue component of \(color.blueComponent) to a string." )
                 return nil
             }
         } else {
-            println ( "Error converting denominator for blue value to a number.  Value is: \(forSearchResult.capturedStrings[ 6 ])" )
+            print ( "Error converting denominator for blue value to a number.  Value is: \(forSearchResult.capturedStrings[ 6 ])" )
             return nil
         }
         
@@ -88,11 +88,11 @@ class CalculatedRGBBuilder: ColorBuilder {
                     return nil
                 }
             } else {
-                println ( "Error converting color green component of \(color.greenComponent) to a string." )
+                print ( "Error converting color green component of \(color.greenComponent) to a string." )
                 return nil
             }
         } else {
-            println ( "Error converting denominator for green value to a number.  Value is: \(forSearchResult.capturedStrings[ 4 ])" )
+            print ( "Error converting denominator for green value to a number.  Value is: \(forSearchResult.capturedStrings[ 4 ])" )
             return nil
         }
         
@@ -106,11 +106,11 @@ class CalculatedRGBBuilder: ColorBuilder {
                     return nil
                 }
             } else {
-                println ( "Error converting color red component of \(color.redComponent) to a string." )
+                print ( "Error converting color red component of \(color.redComponent) to a string." )
                 return nil
             }
         } else {
-            println ( "Error converting denominator for red value to a number.  Value is: \(forSearchResult.capturedStrings[ 2 ])" )
+            print ( "Error converting denominator for red value to a number.  Value is: \(forSearchResult.capturedStrings[ 2 ])" )
             return nil
         }
         

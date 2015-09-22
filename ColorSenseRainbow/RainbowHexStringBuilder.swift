@@ -13,10 +13,10 @@ class RainbowHexStringBuilder: ColorBuilder {
     /**
     Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
     
-    :param: color            The new color that will be described by the string.
-    :param: forSearchResults A SearchResults object containing the ranges for text to replace.
+    - parameter color:            The new color that will be described by the string.
+    - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
     
-    :returns: A String object containing code how to create the color.
+    - returns: A String object containing code how to create the color.
     */
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
@@ -48,7 +48,7 @@ class RainbowHexStringBuilder: ColorBuilder {
             var fakeRange = fakeTCR.rangeAtIndex( 1 )
             fakeRange.length++
             
-            var fakeSearchResult : SearchResult = SearchResult ( color: NSColor.africanVioletColor(alpha: 1.0), textCheckingResult: fakeTCR, capturedStrings: forSearchResult.capturedStrings )
+            var fakeSearchResult : SearchResult = SearchResult ( color: NSColor.africanVioletColor(1.0), textCheckingResult: fakeTCR, capturedStrings: forSearchResult.capturedStrings )
 
             var rangeToChange = NSMakeRange( forSearchResult.tcr.rangeAtIndex( 1 ).location - forSearchResult.tcr.rangeAtIndex( 0 ).location, forSearchResult.tcr.rangeAtIndex( 1 ).length + 1 )
             

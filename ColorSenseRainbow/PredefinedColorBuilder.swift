@@ -13,10 +13,10 @@ class PredefinedColorBuilder: ColorBuilder {
     /**
     Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
     
-    :param: color            The new color that will be described by the string.
-    :param: forSearchResults A SearchResults object containing the ranges for text to replace.
+    - parameter color:            The new color that will be described by the string.
+    - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
     
-    :returns: A String object containing code how to create the color.
+    - returns: A String object containing code how to create the color.
     */
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
@@ -39,7 +39,7 @@ class PredefinedColorBuilder: ColorBuilder {
     
     private func createSwiftColor ( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
@@ -52,7 +52,7 @@ class PredefinedColorBuilder: ColorBuilder {
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.redComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting red component \(color.redComponent) of color to a string" )
+            print ( "Error converting red component \(color.redComponent) of color to a string" )
             return nil
         }
 
@@ -60,14 +60,14 @@ class PredefinedColorBuilder: ColorBuilder {
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.greenComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting green component \(color.greenComponent) of color to a string" )
+            print ( "Error converting green component \(color.greenComponent) of color to a string" )
             return nil
         }
         returnString += ", blue: "
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.blueComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting blue component \(color.blueComponent) of color to a string" )
+            print ( "Error converting blue component \(color.blueComponent) of color to a string" )
             return nil
         }
 
@@ -82,7 +82,7 @@ class PredefinedColorBuilder: ColorBuilder {
     
     private func createObjCColor ( color : NSColor, forSearchResult : SearchResult ) -> String? {
 
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
@@ -96,7 +96,7 @@ class PredefinedColorBuilder: ColorBuilder {
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.redComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting red component \(color.redComponent) of color to a string" )
+            print ( "Error converting red component \(color.redComponent) of color to a string" )
             return nil
         }
         
@@ -104,7 +104,7 @@ class PredefinedColorBuilder: ColorBuilder {
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.greenComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting green component \(color.greenComponent) of color to a string" )
+            print ( "Error converting green component \(color.greenComponent) of color to a string" )
             return nil
         }
         
@@ -112,7 +112,7 @@ class PredefinedColorBuilder: ColorBuilder {
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.blueComponent ) ) {
             returnString += modifiedString
         } else {
-            println ( "Error converting blue component \(color.blueComponent) of color to a string" )
+            print ( "Error converting blue component \(color.blueComponent) of color to a string" )
             return nil
         }
         

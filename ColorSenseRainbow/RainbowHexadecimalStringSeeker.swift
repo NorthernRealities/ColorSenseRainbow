@@ -16,19 +16,30 @@ class RainbowHexadecimalStringSeeker: Seeker {
         var error : NSError?
         
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
+        var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift Rainbow hexidecimal string with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift Rainbow hexidecimal string with alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
      
-        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*\\)", options: .allZeros, error: &error )
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift Rainbow hexidecimal string without alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift Rainbow hexidecimal string without alpha regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }

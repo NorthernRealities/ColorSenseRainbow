@@ -16,19 +16,30 @@ class RainbowIntSeeker: Seeker {
         var error : NSError?
         
         
-        var regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*([01]\\.?[0-9]*)\\s*\\)", options: .allZeros, error: &error )
+        var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift Rainbow Integer with alphaValue regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift Rainbow Integer with alphaValue regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        regex = NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*\\)", options: .allZeros, error: &error )
+        do {
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*\\)", options: [])
+        } catch let error1 as NSError {
+            error = error1
+            regex = nil
+        }
         
         if regex == nil {
-            println ( "Error creating Swift Rainbow Integer without alphaValue regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift Rainbow Integer without alphaValue regex = \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
@@ -54,9 +65,9 @@ class RainbowIntSeeker: Seeker {
             }
             
             
-            let redValue = redString.toInt()!
-            let greenValue = greenString.toInt()!
-            let blueValue = blueString.toInt()!
+            let redValue = Int(redString)!
+            let greenValue = Int(greenString)!
+            let blueValue = Int(blueString)!
             
             let color = NSColor ( redValue: redValue, greenValue: greenValue, blueValue: blueValue, alphaValue: alphaValue )
 

@@ -13,9 +13,9 @@ class ColorBuilderFactory {
     /**
     Returns the proper ColorBuilder object for the given SearchResult object.  It looks at the creation type enumerated value stored in the search result to determine which ColorBuilder to return.
     
-    :param: search The SearchResult object used to determine the ColorBuilder to return.
+    - parameter search: The SearchResult object used to determine the ColorBuilder to return.
     
-    :returns: A ColorBuilder object.
+    - returns: A ColorBuilder object.
     */
     
     func builderForCreationType ( search : SearchResult ) -> ColorBuilder? {
