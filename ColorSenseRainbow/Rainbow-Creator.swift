@@ -114,6 +114,7 @@ extension Color {
                 }
             } catch let error1 as NSError {
                 error = error1
+                print ( "Error encountered when performing regex for check on hex to colour creation \(error?.localizedDescription)" )
             }
         }
         

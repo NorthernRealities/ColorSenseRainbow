@@ -44,13 +44,11 @@ class RainbowHexStringBuilder: ColorBuilder {
             replacementString += "\", alpha: \(color.alphaComponent)"
             
             
-            var fakeTCR : NSTextCheckingResult = forSearchResult.tcr.copy() as! NSTextCheckingResult
+            let fakeTCR : NSTextCheckingResult = forSearchResult.tcr.copy() as! NSTextCheckingResult
             var fakeRange = fakeTCR.rangeAtIndex( 1 )
             fakeRange.length++
             
-            var fakeSearchResult : SearchResult = SearchResult ( color: NSColor.africanVioletColor(1.0), textCheckingResult: fakeTCR, capturedStrings: forSearchResult.capturedStrings )
-
-            var rangeToChange = NSMakeRange( forSearchResult.tcr.rangeAtIndex( 1 ).location - forSearchResult.tcr.rangeAtIndex( 0 ).location, forSearchResult.tcr.rangeAtIndex( 1 ).length + 1 )
+            let rangeToChange = NSMakeRange( forSearchResult.tcr.rangeAtIndex( 1 ).location - forSearchResult.tcr.rangeAtIndex( 0 ).location, forSearchResult.tcr.rangeAtIndex( 1 ).length + 1 )
             
             
             let stringRange = rangeToChange.calculateRangeInString( returnString )

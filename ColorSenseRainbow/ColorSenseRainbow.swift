@@ -90,7 +90,7 @@ class ColorSenseRainbow: NSObject {
     
     func createMenuItems() {
         
-        var item = NSApp.mainMenu!.itemWithTitle("Edit")
+        let item = NSApp.mainMenu!.itemWithTitle("Edit")
         if item != nil {
             actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:"toggleColorsUnderCarat", keyEquivalent:"")
             actionMenuItem.target = self
@@ -113,7 +113,7 @@ class ColorSenseRainbow: NSObject {
         
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if let testForDefault: AnyObject = defaults.objectForKey( defaultsString ) {
+        if let _: AnyObject = defaults.objectForKey( defaultsString ) {
             // It exists so grab the value from defaults.
             
             enabled = defaults.boolForKey( defaultsString )
@@ -140,7 +140,7 @@ class ColorSenseRainbow: NSObject {
         
         
         if ( notification.object is NSTextView ) {
-            var textView = notification.object as! NSTextView
+            let textView = notification.object as! NSTextView
             
             // Returns an NSRange of where the caret is but if there are characters that take up 
             // multiple unicode characters (emoticons, etc) then the range value we get back will
@@ -149,7 +149,9 @@ class ColorSenseRainbow: NSObject {
             let selectedRanges = textView.selectedRanges
             
             if ( selectedRanges.count > 0 ) {
-                if let selectedRange = selectedRanges.first!.rangeValue {
+                if let firstRange = selectedRanges.first {
+                    let selectedRange = firstRange.rangeValue
+
                     let text = textView.textStorage?.string
                     let nsText = NSString ( string: text! )
                     
@@ -193,7 +195,7 @@ class ColorSenseRainbow: NSObject {
                                 addColorWell( colorWell, toTextView: textView )
 
 
-                                var colorFrame = ColorFrameView()
+                                let colorFrame = ColorFrameView()
                                 colorFrame.frame = NSInsetRect( NSIntegralRect( selectionRectInView ), -1, -1 )
                                 colorFrame.color = borderColor
 
@@ -263,7 +265,7 @@ class ColorSenseRainbow: NSObject {
     private func loadEnabledState() {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if let testForDefault: AnyObject = defaults.objectForKey( defaultsString ) {
+        if let _: AnyObject = defaults.objectForKey( defaultsString ) {
             // It exists so grab the value from defaults.
             
             enabled = defaults.boolForKey( defaultsString )
@@ -359,7 +361,7 @@ class ColorSenseRainbow: NSObject {
         }
         
         
-        if let sr = searchResults[ fromTextView ] {
+        if let _ = searchResults[ fromTextView ] {
             searchResults.removeValueForKey( fromTextView )
         }
     }
