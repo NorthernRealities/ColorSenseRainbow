@@ -30,13 +30,19 @@ class ColorSenseRainbow: NSObject {
     
     
     class func pluginDidLoad( bundle: NSBundle ) {
-        let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
-        if appName == "Xcode" {
-            dispatch_once( &token ) {
-                self.sharedPlugin = ColorSenseRainbow(bundle: bundle)
-            }
+        if let  infoDict = NSBundle.mainBundle().infoDictionary,
+                appNameObj = infoDict[ "CFBundleName" ] {
+                    if appNameObj is String {
+                        
+                        let appName = appNameObj as! NSString
+                        if appName == "Xcode" {
+                            dispatch_once( &token ) {
+                                self.sharedPlugin = ColorSenseRainbow(bundle: bundle)
+                            }
+                        }
+
+                    }
         }
-        
     }
 
     
