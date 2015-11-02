@@ -11,6 +11,7 @@ import AppKit
 class ColorFinder : CustomStringConvertible {
     
     var seekers : [ Seeker ] = [
+		IntegerSeeker(),
         RGBCalculatedSeeker(),
         RGBFloatSeeker(),
         PredefinedColorSeeker(),

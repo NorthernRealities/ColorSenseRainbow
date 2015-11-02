@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332F74E21BE7726D00796B93 /* IntegerSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F74E11BE7726D00796B93 /* IntegerSeeker.swift */; };
 		5609BEDC1AE3F5F300DF2D5B /* BorderedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609BEDB1AE3F5F300DF2D5B /* BorderedColorWell.swift */; };
 		5609BEDE1AE417CE00DF2D5B /* ColorFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609BEDD1AE417CE00DF2D5B /* ColorFinder.swift */; };
 		5609BEE01AE4184F00DF2D5B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609BEDF1AE4184F00DF2D5B /* SearchResult.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		332F74E11BE7726D00796B93 /* IntegerSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerSeeker.swift; sourceTree = "<group>"; };
 		5609BEDB1AE3F5F300DF2D5B /* BorderedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedColorWell.swift; sourceTree = "<group>"; };
 		5609BEDD1AE417CE00DF2D5B /* ColorFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFinder.swift; sourceTree = "<group>"; };
 		5609BEDF1AE4184F00DF2D5B /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				5662361F1AE97CCB00BABC79 /* RGBFloatSeeker.swift */,
 				56B4D75A1B72919000F59DD6 /* WhiteSeeker.swift */,
 				566236211AE9830800BABC79 /* RGBCalculatedSeeker.swift */,
+				332F74E11BE7726D00796B93 /* IntegerSeeker.swift */,
 				5609BEE11AE41A1500DF2D5B /* Seeker.swift */,
 			);
 			name = Seekers;
@@ -234,6 +237,7 @@
 				566236201AE97CCB00BABC79 /* RGBFloatSeeker.swift in Sources */,
 				564C22F91AEC791C0098E933 /* ColorBuilder.swift in Sources */,
 				564C22FB1AEC79370098E933 /* DefaultRGBBuilder.swift in Sources */,
+				332F74E21BE7726D00796B93 /* IntegerSeeker.swift in Sources */,
 				5609BEDC1AE3F5F300DF2D5B /* BorderedColorWell.swift in Sources */,
 				56B4D75D1B72973400F59DD6 /* DefaultWhiteBuilder.swift in Sources */,
 				566236221AE9830800BABC79 /* RGBCalculatedSeeker.swift in Sources */,
