@@ -59,7 +59,7 @@ class ColorSenseRainbow: NSObject {
 
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver( self, selector: "applicationFinishedLoading:", name: NSApplicationDidFinishLaunchingNotification, object: nil )
+        NSNotificationCenter.defaultCenter().addObserver( self, selector: #selector(ColorSenseRainbow.applicationFinishedLoading(_:)), name: NSApplicationDidFinishLaunchingNotification, object: nil )
     }
     
 
@@ -98,7 +98,7 @@ class ColorSenseRainbow: NSObject {
         
         let item = NSApp.mainMenu!.itemWithTitle("Edit")
         if item != nil {
-            actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:"toggleColorsUnderCarat", keyEquivalent:"")
+            actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:#selector(ColorSenseRainbow.toggleColorsUnderCarat), keyEquivalent:"")
             actionMenuItem.target = self
             
             if enabled == true {
@@ -291,8 +291,8 @@ class ColorSenseRainbow: NSObject {
         
         actionMenuItem.state = NSOnState
         
-        NSNotificationCenter.defaultCenter().addObserver( self, selector: "selectionDidChange:", name: NSTextViewDidChangeSelectionNotification, object: nil )
-        NSNotificationCenter.defaultCenter().addObserver( self, selector: "windowWillClose:", name: NSWindowWillCloseNotification, object: nil )
+        NSNotificationCenter.defaultCenter().addObserver( self, selector: #selector(ColorSenseRainbow.selectionDidChange(_:)), name: NSTextViewDidChangeSelectionNotification, object: nil )
+        NSNotificationCenter.defaultCenter().addObserver( self, selector: #selector(NSWindowDelegate.windowWillClose(_:)), name: NSWindowWillCloseNotification, object: nil )
     }
     
     
