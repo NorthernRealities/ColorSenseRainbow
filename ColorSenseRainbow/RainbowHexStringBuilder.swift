@@ -46,7 +46,7 @@ class RainbowHexStringBuilder: ColorBuilder {
             
             let fakeTCR : NSTextCheckingResult = forSearchResult.tcr.copy() as! NSTextCheckingResult
             var fakeRange = fakeTCR.rangeAtIndex( 1 )
-            fakeRange.length++
+            fakeRange.length += 1
             
             let rangeToChange = NSMakeRange( forSearchResult.tcr.rangeAtIndex( 1 ).location - forSearchResult.tcr.rangeAtIndex( 0 ).location, forSearchResult.tcr.rangeAtIndex( 1 ).length + 1 )
             
