@@ -12,7 +12,7 @@ extension NSRange {
     
     func calculateRangeInString ( inString : String ) -> Range<String.Index> {
         
-        return Range<String.Index>( start: inString.startIndex.advancedBy(self.location ), end: inString.startIndex.advancedBy(self.location + self.length ) )
+        return Range<String.Index>( inString.startIndex.advancedBy(self.location ) ..< inString.startIndex.advancedBy(self.location + self.length ) )
         
     }
 }
