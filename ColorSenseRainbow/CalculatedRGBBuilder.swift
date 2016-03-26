@@ -24,13 +24,10 @@ class CalculatedRGBBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
-        var returnString = ""
-
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
+        
         
         let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
