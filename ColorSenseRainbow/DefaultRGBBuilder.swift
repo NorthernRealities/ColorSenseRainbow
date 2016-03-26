@@ -21,69 +21,83 @@ class DefaultRGBBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
-        var returnString = ""
-        
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
+        
         
         let numberFormatter = NSNumberFormatter()
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
+
+        
+        // While the alpha component may not always be used it most likely will be as
+        // only add-on library functions don't have it. So to reduce code duplication
+        // with minimal performance impact I've just put the conversion here.
+        
+        guard let alphaComponent = convertNumberToString( Double ( color.alphaComponent ), numberDesc: "alpha component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+        
         
         if ( forSearchResult.tcr.numberOfRanges == 5 ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {
+            
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: alphaComponent ) {
                 returnString = modifiedString
             } else {
                 return nil
             }
         } else if ( color.alphaComponent < 1.0 ) {
-            // User has changed the alpha so we need to add it to the code.
+            // User has changed the alpha from using using a function that assumed the default of 1.0 so we need to add it to the code.
             
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alpha: \(color.alphaComponent)" ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alpha: " + alphaComponent ) {
                 returnString = modifiedString
             } else {
                 return nil
             }
         }
 
+
+        // Change the maximun number of digits for the colour components and then handle the colours.
         
-        if let component = numberFormatter.stringFromNumber( Double ( color.blueComponent ) ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: component ) {
-                returnString = modifiedString
-            } else {
-                return nil
-            }
-        } else {
-            print ( "Error converting blue component with value of \(color.blueComponent) to a string." )
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
+
+        
+        guard
+            let blueComponent = convertNumberToString( Double ( color.blueComponent ), numberDesc: "blue component", numberFormatter: numberFormatter ),
+            let greenComponent = convertNumberToString( Double ( color.greenComponent ), numberDesc: "green component", numberFormatter: numberFormatter ),
+            let redComponent = convertNumberToString( Double ( color.redComponent ), numberDesc: "red component", numberFormatter: numberFormatter ) else {
+                
             return nil
         }
 
-        if let component = numberFormatter.stringFromNumber( Double ( color.greenComponent ) ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: component ) {
-                returnString = modifiedString
-            } else {
-                return nil
-            }
+        
+        // Easier to use if statements than guard. Would have to use different
+        // variable names with guard and couldn't put them all together like
+        // the colour conversion as you need the output of one as input to
+        // the next.
+        
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: blueComponent ) {
+            returnString = modifiedString
         } else {
-            print ( "Error converting green component with value of \(color.greenComponent) to a string." )
+            return nil
+        }
+
+        
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: greenComponent ) {
+            returnString = modifiedString
+        } else {
             return nil
         }
         
-        if let component = numberFormatter.stringFromNumber( Double ( color.redComponent ) ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: component ) {
-                returnString = modifiedString
-            } else {
-                return nil
-            }
+        
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: redComponent ) {
+            returnString = modifiedString
         } else {
-            print ( "Error converting red component with value of \(color.redComponent) to a string." )
             return nil
         }
         

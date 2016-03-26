@@ -21,19 +21,16 @@ class DefaultHSBBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
-        var returnString = ""
-        
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
+
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.locale = NSLocale(localeIdentifier: "us")
         
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
@@ -41,68 +38,73 @@ class DefaultHSBBuilder: ColorBuilder {
         // First thing to do is to convert the color to the Calibrated RGB ColorSpace.
         // It should be but we do the conversion just in case or else it will raise an exception.
         
-        if let hueColor = color.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) {
-        
-            // While it always has an alpha component there may be an extension at a later date that
-            // removes it so keep this in there.  It doesn't hurt.
-            
-            if ( forSearchResult.tcr.numberOfRanges == 5 ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: "\(hueColor.alphaComponent)" ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else if ( hueColor.alphaComponent < 1.0 ) {
-                // User has changed the alpha so we need to add it to the code.
-                
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alpha: \(hueColor.alphaComponent)" ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            }
-            
-            
-            if let component = numberFormatter.stringFromNumber( Double ( hueColor.brightnessComponent ) ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: component ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else {
-                print ( "Error converting brightness component with value of \(hueColor.brightnessComponent) to a string." )
-                return nil
-            }
-            
-            if let component = numberFormatter.stringFromNumber( Double ( hueColor.saturationComponent ) ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: component ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else {
-                print ( "Error converting saturation component with value of \(hueColor.saturationComponent) to a string." )
-                return nil
-            }
-            
-            if let component = numberFormatter.stringFromNumber( Double ( hueColor.hueComponent ) ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: component ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else {
-                print ( "Error converting hue component with value of \(hueColor.hueComponent) to a string." )
-                return nil
-            }
-            
-            
-            return returnString
+        guard let hueColor = color.colorUsingColorSpace( NSColorSpace.genericRGBColorSpace() ) else {
+            print ( "Error converting the color to genericRGB colorspace." )
+            return nil
         }
         
-        print ( "Error converting the color to genericRGB colorspace." )
-        return nil
+        
+        // While it always has an alpha component there may be an extension at a later date that
+        // removes it so keep this in there.  It doesn't hurt.
+        
+        guard let alphaComponent = convertNumberToString( Double ( hueColor.alphaComponent ), numberDesc: "alpha component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+        
+        
+        if ( forSearchResult.tcr.numberOfRanges == 5 ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: alphaComponent ) {
+                returnString = modifiedString
+            } else {
+                return nil
+            }
+        } else if ( hueColor.alphaComponent < 1.0 ) {
+            // User has changed the alpha so we need to add it to the code.
+            
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alpha: " + alphaComponent ) {
+                returnString = modifiedString
+            } else {
+                return nil
+            }
+        }
+        
+        
+        // Change the maximun number of digits for the colour components and then handle the colours.
+        
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
+        
+        
+        guard
+            let brightnessComponent = convertNumberToString( Double ( hueColor.brightnessComponent ), numberDesc: "brightness component", numberFormatter: numberFormatter ),
+            let saturationComponent = convertNumberToString( Double ( hueColor.saturationComponent ), numberDesc: "saturation component", numberFormatter: numberFormatter ),
+            let hueComponent = convertNumberToString( Double ( hueColor.hueComponent ), numberDesc: "hue component", numberFormatter: numberFormatter ) else {
+                
+                return nil
+        }
 
+        
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: brightnessComponent ) {
+            returnString = modifiedString
+        } else {
+            return nil
+        }
+        
+
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: saturationComponent ) {
+            returnString = modifiedString
+        } else {
+            return nil
+        }
+
+        
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: hueComponent ) {
+            returnString = modifiedString
+        } else {
+            return nil
+        }
+        
+        
+        return returnString
     }
 
 }
