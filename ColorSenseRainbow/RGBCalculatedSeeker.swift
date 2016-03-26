@@ -14,13 +14,16 @@ class RGBCalculatedSeeker: Seeker {
         super.init()
         
         var error : NSError?
-        
-        
+    
+        var regex: NSRegularExpression?
+    
+
         // Swift
-        
-    var regex: NSRegularExpression?
+    
+        let commonSwiftRegex = "ed:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*,\\s*green:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*,\\s*blue:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*"
+    
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*r" + commonSwiftRegex + ",\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -34,7 +37,7 @@ class RGBCalculatedSeeker: Seeker {
         
         
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*r" + commonSwiftRegex + "\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -48,7 +51,7 @@ class RGBCalculatedSeeker: Seeker {
         
         
         do {
-            regex = try NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*green:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*blue:\\s*([0-9]+\\.?[0-9]*)\\s*\\/\\s*([0-9]+\\.?[0-9]*)\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "NSColor" + swiftInit + "\\s*\\(\\s*(?:calibrated|device|SRGB)R" + commonSwiftRegex + ",\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -61,8 +64,9 @@ class RGBCalculatedSeeker: Seeker {
         }
         
         
+        // Objective-C - Only functions with alpha defined
+
         do {
-            // Objective-C - Only functions with alpha defined
             // The f? is outside of the capture group so that converting the string to a number in the Builder will work.
 
             regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*green:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*blue:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*alpha:\\s*([01]\\.[0-9]+)f?\\s*\\]", options: [])

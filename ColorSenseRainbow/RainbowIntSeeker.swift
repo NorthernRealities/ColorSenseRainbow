@@ -15,10 +15,11 @@ class RainbowIntSeeker: Seeker {
         
         var error : NSError?
         
-        
         var regex: NSRegularExpression?
+        
+        
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil

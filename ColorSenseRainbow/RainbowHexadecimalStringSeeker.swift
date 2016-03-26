@@ -18,7 +18,7 @@ class RainbowHexadecimalStringSeeker: Seeker {
         
         var regex: NSRegularExpression?
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*,\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hexString:\\s*\"#?([0-9a-fA-F]{6})\"\\s*,\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
