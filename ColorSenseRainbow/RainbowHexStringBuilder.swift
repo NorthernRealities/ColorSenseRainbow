@@ -21,14 +21,10 @@ class RainbowHexStringBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
 
-        var returnString = ""
-        
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
-
+        
         
         if ( forSearchResult.tcr.numberOfRanges == 3 ) {
             if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {
@@ -46,7 +42,7 @@ class RainbowHexStringBuilder: ColorBuilder {
             
             let fakeTCR : NSTextCheckingResult = forSearchResult.tcr.copy() as! NSTextCheckingResult
             var fakeRange = fakeTCR.rangeAtIndex( 1 )
-            fakeRange.length++
+            fakeRange.length += 1
             
             let rangeToChange = NSMakeRange( forSearchResult.tcr.rangeAtIndex( 1 ).location - forSearchResult.tcr.rangeAtIndex( 0 ).location, forSearchResult.tcr.rangeAtIndex( 1 ).length + 1 )
             
