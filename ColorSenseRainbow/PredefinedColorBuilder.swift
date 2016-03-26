@@ -43,7 +43,7 @@ class PredefinedColorBuilder: ColorBuilder {
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
@@ -86,7 +86,7 @@ class PredefinedColorBuilder: ColorBuilder {
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
