@@ -96,18 +96,20 @@ class ColorSenseRainbow: NSObject {
     
     func createMenuItems() {
         
-        let item = NSApp.mainMenu!.itemWithTitle("Edit")
-        if item != nil {
-            actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:#selector(ColorSenseRainbow.toggleColorsUnderCarat), keyEquivalent:"")
-            actionMenuItem.target = self
-            
-            if enabled == true {
-                actionMenuItem.state = NSOnState
-            }
-            
-            item!.submenu!.addItem(NSMenuItem.separatorItem())
-            item!.submenu!.addItem(actionMenuItem)
+        guard let item = NSApp.mainMenu!.itemWithTitle("Edit") else {
+            return
         }
+        
+        actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:#selector(ColorSenseRainbow.toggleColorsUnderCarat), keyEquivalent:"")
+        actionMenuItem.target = self
+        
+        if enabled == true {
+            actionMenuItem.state = NSOnState
+        }
+        
+        
+        item.submenu!.addItem(NSMenuItem.separatorItem())
+        item.submenu!.addItem(actionMenuItem)
     }
 
     
