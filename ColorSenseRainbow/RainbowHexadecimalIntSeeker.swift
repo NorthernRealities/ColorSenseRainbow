@@ -21,7 +21,7 @@ class RainbowHexadecimalIntSeeker: Seeker {
         
         // Swift
         
-        let commonSwiftRegex = "(?:NS|UI)Color\\s*\\(\\s*hex:\\s*0x([0-9a-fA-F]{6})\\s*"
+        let commonSwiftRegex = "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*hex:\\s*0x([0-9a-fA-F]{6})\\s*"
         
         do {
             regex = try NSRegularExpression ( pattern: commonSwiftRegex + ",\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
