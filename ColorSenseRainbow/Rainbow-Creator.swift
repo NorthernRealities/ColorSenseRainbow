@@ -149,7 +149,7 @@ extension Color {
     
     convenience init ( hueDegrees: Int, saturationPercent: Int, brightnessPercent: Int, alpha: CGFloat = 1.0 ) {
         
-        self.init ( hue: CGFloat ( hueDegrees / 360 ), saturation: CGFloat ( saturationPercent / 100 ), brightness: CGFloat ( brightnessPercent / 100 ), alpha: alpha )
+        self.init ( calibratedHue: CGFloat ( Double ( hueDegrees ) / 360.0 ), saturation: CGFloat ( Double ( saturationPercent ) / 100.0 ), brightness: CGFloat ( Double ( brightnessPercent ) / 100.0 ), alpha: alpha )
     }
 }
 

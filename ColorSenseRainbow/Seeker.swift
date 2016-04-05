@@ -34,6 +34,12 @@ class Seeker {
     let swiftRBGComponentConst = "([0-9]+|[0-9]+\\.[0-9]+)"
     
     
+    // Defines how the HSB component of the colour is specified for numbers >= zero. Numbers may be integer and no bounds checking is performed. Values for hue (H) are intended to be between 0 and 359 inclusive while saturation (S) and brightness (B) represent percentages which range from 0 and 100 inclusive.
+    // Valid values: 0; 255 (only for hue); 10
+    
+    let swiftHSBComponentConst = "([0-9]+)"
+    
+    
     // Declares the optional use of the init function call
     
     let swiftInit = "(?:\\.init)?"

@@ -46,6 +46,9 @@ class ColorBuilderFactory {
         case .DefaultHSB:
             return DefaultHSBBuilder()
             
+        case .RainbowHSB:
+            return RainbowHSBBuilder()
+            
         case .Unknown:
             return nil
         }
