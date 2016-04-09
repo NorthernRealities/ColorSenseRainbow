@@ -113,12 +113,12 @@
 				564C22F81AEC791C0098E933 /* ColorBuilder.swift */,
 				564C22FA1AEC79370098E933 /* DefaultRGBBuilder.swift */,
 				566FFA7C1B6EA02B00F4EBA6 /* DefaultHSBBuilder.swift */,
-				56673E7A1CB44401009CBCB4 /* RainbowHSBBuilder.swift */,
 				56B4D75C1B72973400F59DD6 /* DefaultWhiteBuilder.swift */,
 				56D014671AF11C1F005624AF /* PredefinedColorBuilder.swift */,
-				56D014631AF04131005624AF /* RainbowIntBuilder.swift */,
 				56F4E9E31B1624210083699A /* RainbowHexIntBuilder.swift */,
 				564C22FC1AEE833B0098E933 /* RainbowHexStringBuilder.swift */,
+				56673E7A1CB44401009CBCB4 /* RainbowHSBBuilder.swift */,
+				56D014631AF04131005624AF /* RainbowIntBuilder.swift */,
 			);
 			name = ColorBuilders;
 			sourceTree = "<group>";

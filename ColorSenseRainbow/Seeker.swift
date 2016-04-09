@@ -40,6 +40,9 @@ class Seeker {
     let swiftHSBComponentConst = "([0-9]+)"
     
     
+    // rainbowIntColourConst - Defined in RainbowIntSeeker.swift
+    
+    
     // Declares the optional use of the init function call
     
     let swiftInit = "(?:\\.init)?"

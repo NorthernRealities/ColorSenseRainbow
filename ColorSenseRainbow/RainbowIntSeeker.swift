@@ -9,6 +9,11 @@
 import AppKit
 
 class RainbowIntSeeker: Seeker {
+    
+    // Defines how the RGB component of the colour is specified for Integer values between 0 and 255 though the regular expression will work for integers up to 299.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453
+
+    let rainbowIntColourConst = "([0-2][0-9]{2}|[0-9]{1,2})"
 
     override init () {
         super.init()
@@ -18,8 +23,12 @@ class RainbowIntSeeker: Seeker {
         var regex: NSRegularExpression?
         
         
+        // Swift
+        
+        let commonSwiftRegex = "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*redValue:\\s*" + rainbowIntColourConst + "\\s*,\\s*greenValue:\\s*" + rainbowIntColourConst + "\\s*,\\s*blueValue:\\s*" + rainbowIntColourConst + "\\s*"
+        
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*,\\s*alphaValue:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: commonSwiftRegex + ",\\s*alphaValue:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -33,7 +42,7 @@ class RainbowIntSeeker: Seeker {
         
         
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*redValue:\\s*([0-9]{1,3})\\s*,\\s*greenValue:\\s*([0-9]{1,3})\\s*,\\s*blueValue:\\s*([0-9]{1,3})\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: commonSwiftRegex + "\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
