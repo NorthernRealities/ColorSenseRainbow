@@ -26,8 +26,25 @@ class RainbowIntBuilder: ColorBuilder {
         }
         
         
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.locale = NSLocale(localeIdentifier: "us")
+        
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+        numberFormatter.minimumFractionDigits = 1
+        numberFormatter.decimalSeparator = "."
+        
+
+        // While it always has an alpha component there may be an extension at a later date that
+        // removes it so keep this in there.  It doesn't hurt.
+        
+        guard let alphaComponent = convertNumberToString( Double ( color.alphaComponent ), numberDesc: "alpha component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+        
+        
         if ( forSearchResult.tcr.numberOfRanges == 5 ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 4, inText: returnString, withReplacementText: alphaComponent ) {
                 returnString = modifiedString
             } else {
                 return nil
@@ -35,7 +52,7 @@ class RainbowIntBuilder: ColorBuilder {
         } else if ( color.alphaComponent < 1.0 ) {
             // User has changed the alpha so we need to add it to the code.
             
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alphaValue: \(color.alphaComponent)" ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: forSearchResult.capturedStrings[3] + ", alphaValue: " + alphaComponent ) {
                 returnString = modifiedString
             } else {
                 return nil
