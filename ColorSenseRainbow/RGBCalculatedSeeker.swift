@@ -17,7 +17,20 @@ class RGBCalculatedSeeker: Seeker {
     
         var regex: NSRegularExpression?
     
+        
+        // Defines how the RGB component of the colour is specified for numbers >= zero. Numbers may be integer or floating point and intended to be between 0 and 255 inclusive but no bounds checking is performed.
+        // Valid values: 0; 0.0; 255; 127.55
+        
+        let swiftRBGComponentConst = "([0-9]+|[0-9]+\\.[0-9]+)"
 
+
+        // Defines how the RGB component of the colour is specified for numbers >= zero. Numbers may be integer or floating point and intended to be between 0 and 255 inclusive but no bounds checking is performed.
+        // The f is outside of the capture group so that converting the string to a number in the Builder will work.
+        // Valid values: 0; 0.0; 255; 127.55, 0.0f 0.f 134.0 154.f 39.0f
+        
+        let objcRBGComponentConst = "([0-9]+|[0-9]+\\.[0-9]+)(?:f|\\.f)?"
+
+        
         // Swift
     
         let commonSwiftRegex = "ed:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*,\\s*green:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*,\\s*blue:\\s*" + swiftRBGComponentConst + "\\s*\\/\\s*" + swiftRBGComponentConst + "\\s*"
@@ -66,10 +79,10 @@ class RGBCalculatedSeeker: Seeker {
         
         // Objective-C - Only functions with alpha defined
 
+        let commonObjCRegex = "Red:\\s*" + objcRBGComponentConst + "\\s*\\/\\s*" + objcRBGComponentConst + "\\s*green:\\s*" + objcRBGComponentConst + "\\s*\\/\\s*" + objcRBGComponentConst + "\\s*blue:\\s*" + objcRBGComponentConst + "\\s*\\/\\s*" + objcRBGComponentConst + "\\s*alpha:\\s*" + objcAlphaConst + "\\s*\\]"
+        
         do {
-            // The f? is outside of the capture group so that converting the string to a number in the Builder will work.
-
-            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*green:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*blue:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*alpha:\\s*([01]\\.[0-9]+)f?\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWith" + commonObjCRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -86,7 +99,7 @@ class RGBCalculatedSeeker: Seeker {
             // Don't care about saving the Calibrated, Device, or SRGB since we assume that any function that 
             // replace the values will do so selectively instead of overwriting the whole string.
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|SRGB)Red:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*green:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*blue:\\s*([0-9]+\\.?[0-9]*)f?\\s*\\/\\s*([0-9]+\\.?[0-9]*)f?\\s*alpha:\\s*([01]\\.[0-9]+)f?\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|SRGB)" + commonObjCRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil

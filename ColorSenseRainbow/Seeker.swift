@@ -27,22 +27,6 @@ class Seeker {
     let swiftFloatColourConst = "([01]|[01]\\.[0-9]+)"
     
     
-    // Defines how the RGB component of the colour is specified for numbers >= zero. Numbers may be integer or floating point and intended to be between 0 and 255 inclusive but no bounds checking is performed.
-    // Valid values: 0; 0.0; 255; 127.55
-    // TODO: - Have it so that if there's nothing after the decimal then the search fails.
-
-    let swiftRBGComponentConst = "([0-9]+|[0-9]+\\.[0-9]+)"
-    
-    
-    // Defines how the HSB component of the colour is specified for numbers >= zero. Numbers may be integer and no bounds checking is performed. Values for hue (H) are intended to be between 0 and 359 inclusive while saturation (S) and brightness (B) represent percentages which range from 0 and 100 inclusive.
-    // Valid values: 0; 255 (only for hue); 10
-    
-    let swiftHSBComponentConst = "([0-9]+)"
-    
-    
-    // rainbowIntColourConst - Defined in RainbowIntSeeker.swift
-    
-    
     // Declares the optional use of the init function call
     
     let swiftInit = "(?:\\.init)?"
@@ -51,11 +35,21 @@ class Seeker {
     // Defines how the alpha component of the colour is specified for floating point values between 0 and 1 inclusive.
     // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453; 0f
     
-    let objcAlphaConst = "([01]|[01]?\\.[0-9]+)f?"
+    let objcAlphaConst = "([01]|[01]?\\.[0-9]+)(?:f|\\.f)?"
     
-    
-    let objcFloatColourConst = "([01]|[01]?\\.[0-9]+)f?"
+   
+    // Defines how the RGB component of the colour is specified for floating point values between 0 and 1 inclusive. It's defined separately in case it needs to be different in the future.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453
 
+    let objcFloatColourConst = "([01]|[01]?\\.[0-9]+)(?:f|\\.f)?"
+
+    
+    // swiftRBGComponentConst - Defined in RGBCalculatedSeeker.swift
+    // swiftHSBComponentConst - Defined in RainbowHSBSeeker.swift
+    // rainbowIntColourConst - Defined in RainbowIntSeeker.swift
+    // objcRBGComponentConst - Defined in RGBCalculatedSeeker.swift
+
+    
     
     /**
     Look for an object of color being created in the line of text being passed in using regular expressions.  If found it returns back an object of NSColor and the location in the line where the text occurs.
