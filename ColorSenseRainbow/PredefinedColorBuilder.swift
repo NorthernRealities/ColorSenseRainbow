@@ -43,7 +43,7 @@ class PredefinedColorBuilder: ColorBuilder {
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
@@ -56,6 +56,7 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
 
+        
         returnString += ", green: "
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.greenComponent ) ) {
             returnString += modifiedString
@@ -63,6 +64,8 @@ class PredefinedColorBuilder: ColorBuilder {
             print ( "Error converting green component \(color.greenComponent) of color to a string" )
             return nil
         }
+        
+        
         returnString += ", blue: "
         if let modifiedString = numberFormatter.stringFromNumber( Double ( color.blueComponent ) ) {
             returnString += modifiedString
@@ -74,7 +77,15 @@ class PredefinedColorBuilder: ColorBuilder {
         
         // Always include the alpha component as it is impossible to tell if there is
         // an extionsion to handle the creation of colours without it.
-        returnString += ", alpha: \(color.alphaComponent) )"
+        
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+
+        if let modifiedString = numberFormatter.stringFromNumber( Double ( color.alphaComponent ) ) {
+            returnString += ", alpha: \(modifiedString) )"
+        } else {
+            print ( "Error converting alpha component \(color.alphaComponent) of color to a string" )
+            return nil
+        }
         
         return returnString
     }
@@ -86,7 +97,7 @@ class PredefinedColorBuilder: ColorBuilder {
 		numberFormatter.locale = NSLocale(localeIdentifier: "us")
 
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
@@ -116,8 +127,16 @@ class PredefinedColorBuilder: ColorBuilder {
             return nil
         }
         
-        returnString += " alpha:\(color.alphaComponent)]"
-                
+        
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+
+        if let modifiedString = numberFormatter.stringFromNumber( Double ( color.alphaComponent ) ) {
+            returnString += " alpha:\(modifiedString)]"
+        } else {
+            print ( "Error converting alpha component \(color.alphaComponent) of color to a string" )
+            return nil
+        }
+        
         return returnString
 }
     
