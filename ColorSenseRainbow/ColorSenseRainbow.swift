@@ -100,7 +100,7 @@ class ColorSenseRainbow: NSObject {
             return
         }
         
-        actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:#selector(ColorSenseRainbow.toggleColorsUnderCarat), keyEquivalent:"")
+        actionMenuItem = NSMenuItem(title:"Show Colors Under Carat", action:"toggleColorsUnderCarat", keyEquivalent:"")
         actionMenuItem.target = self
         
         if enabled == true {
