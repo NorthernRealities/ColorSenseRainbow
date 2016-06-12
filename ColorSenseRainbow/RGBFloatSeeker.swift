@@ -15,66 +15,68 @@ class RGBFloatSeeker: Seeker {
         
         var error : NSError?
         
+        var regex: NSRegularExpression?
+        
         
         // Swift
-        // The values 0 and 1 are valid so everything after is optional.  The solution "\\.?[0-9]*" isn't optimal
-        // because the period could be specified without any digits after and a match be made or vice versa.
         
-    var regex: NSRegularExpression?
+        let commonSwiftRegex = "ed:\\s*" + swiftFloatColourConst + "\\s*,\\s*green:\\s*" + swiftFloatColourConst + "\\s*,\\s*blue:\\s*" + swiftFloatColourConst + "\\s*"
+        
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*r" + commonSwiftRegex + ",\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [] )
         } catch let error1 as NSError {
             error = error1
             regex = nil
         }
         
         if regex == nil {
-            print ( "Error creating Swift RGB float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift RGB float with alpha regex - \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*red:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*r" + commonSwiftRegex + "\\)", options: [] )
         } catch let error1 as NSError {
             error = error1
             regex = nil
         }
         
         if regex == nil {
-            print ( "Error creating Swift RGB float without alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift RGB float without alpha regex - \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
         do {
-            regex = try NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device|SRGB)Red:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*green:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*blue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "NSColor" + swiftInit + "\\s*\\(\\s*(?:calibrated|device|SRGB)R" + commonSwiftRegex + ",\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [] )
         } catch let error1 as NSError {
             error = error1
             regex = nil
         }
         
         if regex == nil {
-            print ( "Error creating Swift NSColor calibrated, device, SRGB float regex = \(error?.localizedDescription)" )
+            print ( "Error creating Swift NSColor calibrated, device, SRGB float regex - \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
         
         
-        
-        do {
-            // Objective-C - Only functions with alpha defined
 
-            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*([01]|[01]\\.[0-9]+)f?\\s*green:\\s*([01]|[01]\\.[0-9]+)f?\\s*blue:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        // Objective-C - Only functions with alpha defined
+
+        do {
+
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithRed:\\s*" + objcFloatColourConst + "\\s*green:\\s*" + objcFloatColourConst + "\\s*blue:\\s*" + objcFloatColourConst + "\\s*alpha:\\s*" + objcAlphaConst + "\\s*\\]", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
         }
         
         if regex == nil {
-            print ( "Error creating Objective-C RGB float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C RGB float with alpha regex - \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }
@@ -84,14 +86,14 @@ class RGBFloatSeeker: Seeker {
             // Don't care about saving the Calibrated, Device, or SRGB since we assume that any function that
             // replace the values will do so selectively instead of overwriting the whole string.
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|SRGB)Red:\\s*([01]|[01]\\.[0-9]+)f?\\s*green:\\s*([01]|[01]\\.[0-9]+)f?\\s*blue:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device|SRGB)Red:\\s*" + objcFloatColourConst + "\\s*green:\\s*" + objcFloatColourConst + "\\s*blue:\\s*" + objcFloatColourConst + "\\s*alpha:\\s*" + objcAlphaConst + "\\s*\\]", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
         }
         
         if regex == nil {
-            print ( "Error creating Objective-C calibrated, device, SRGB calculated float with alpha regex = \(error?.localizedDescription)" )
+            print ( "Error creating Objective-C calibrated, device, SRGB calculated float with alpha regex - \(error?.localizedDescription)" )
         } else {
             regexes.append( regex! )
         }

@@ -15,14 +15,14 @@ class HSBFloatSeeker: Seeker {
         
         var error : NSError?
         
+        var regex: NSRegularExpression?
         
         // Swift
-        // The values 0 and 1 are valid so everything after is optional.  The solution "\\.?[0-9]*" isn't optimal
-        // because the period could be specified without any digits after and a match be made or vice versa.
+
+        let commonSwiftRegex = "ue:\\s*" + swiftFloatColourConst + "\\s*,\\s*saturation:\\s*" + swiftFloatColourConst + "\\s*,\\s*brightness:\\s*" + swiftFloatColourConst + "\\s*,\\s*alpha:\\s*" + swiftAlphaConst + "\\s*\\)"
         
-    var regex: NSRegularExpression?
         do {
-            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color\\s*\\(\\s*hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "(?:NS|UI)Color" + swiftInit + "\\s*\\(\\s*h" + commonSwiftRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -35,8 +35,9 @@ class HSBFloatSeeker: Seeker {
         }
         
         
+        
         do {
-            regex = try NSRegularExpression ( pattern: "NSColor\\s*\\(\\s*(?:calibrated|device)Hue:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*saturation:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*brightness:\\s*([01]|[01]\\.[0-9]+)\\s*,\\s*alpha:\\s*([01]|[01]\\.[0-9]+)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: "NSColor" + swiftInit + "\\s*\\(\\s*(?:calibrated|device)H" + commonSwiftRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -50,10 +51,12 @@ class HSBFloatSeeker: Seeker {
         
         
         
-        do {
-            // Objective-C - Only functions with alpha defined
+        // Objective-C - Only functions with alpha defined
+
+        let commonObjCRegex = "Hue:\\s*" + objcFloatColourConst + "\\s*saturation:\\s*" + objcFloatColourConst + "\\s*brightness:\\s*" + objcFloatColourConst + "\\s*alpha:\\s*" + objcAlphaConst + "\\s*\\]"
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWithHue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+        do {
+            regex = try NSRegularExpression ( pattern: "\\[\\s*(?:NS|UI)Color\\s*colorWith" + commonObjCRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -70,7 +73,7 @@ class HSBFloatSeeker: Seeker {
             // Don't care about saving the Calibrated or Device since we assume that any function that
             // replace the values will do so selectively instead of overwriting the whole string.
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device)Hue:\\s*([01]|[01]\\.[0-9]+)f?\\s*saturation:\\s*([01]|[01]\\.[0-9]+)f?\\s*brightness:\\s*([01]|[01]\\.[0-9]+)f?\\s*alpha:\\s*([01]|[01]\\.[0-9]+)f?\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: "\\[\\s*NSColor\\s*colorWith(?:Calibrated|Device)" + commonObjCRegex, options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil

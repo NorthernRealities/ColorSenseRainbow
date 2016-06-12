@@ -10,7 +10,9 @@ import AppKit
 
 class ColorBuilder {
     
-    static let maximumFractionDigits : Int = 4
+    static let maximumFractionDigits : Int = 4      // Delete this after everything converted over to ColorFractionsDigits
+    static let maximumAlphaFractionDigits : Int = 2
+    static let maximumColorFractionDigits : Int = 4
 
     
     /**
@@ -71,6 +73,23 @@ class ColorBuilder {
         }
         
         return nil
+    }
+
+    
+    
+    
+    
+    
+    func convertNumberToString ( numberToConvert : Double, numberDesc : String, numberFormatter : NSNumberFormatter ) -> String?
+    {
+        let numberAsString = numberFormatter.stringFromNumber( numberToConvert )
+        
+        if ( numberAsString == nil ) {
+            print ( "Error converting \(numberDesc) with value of \(numberToConvert) to a string." )
+            return nil
+        }
+        
+        return numberAsString
     }
 
 }

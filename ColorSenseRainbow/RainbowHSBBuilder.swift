@@ -1,30 +1,30 @@
 //
-//  DefaultHSBBuilder.swift
+//  RainbowHSBBuilder.swift
 //  ColorSenseRainbow
 //
-//  Created by Reid Gravelle on 2015-08-02.
-//  Copyright (c) 2015 Northern Realities Inc. All rights reserved.
+//  Created by Reid Gravelle on 2016-04-05.
+//  Copyright © 2016 Northern Realities Inc. All rights reserved.
 //
 
 import AppKit
 
-class DefaultHSBBuilder: ColorBuilder {
+class RainbowHSBBuilder: ColorBuilder {
 
     /**
-    Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
-    
-    - parameter color:            The new color that will be described by the string.
-    - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
-    
-    - returns: A String object containing code how to create the color.
-    */
+     Generates a String containing the code required to create a color object for the specified color in the method detailed by the SearchResults.  While a new string could be generated more easily by just entering the values into a template replacing the values in the existing string will keep the formatting the way the user prefers.  This involves moving backwards through the values as the new values may be different lengths and would change the ranges for later values.
+     
+     - parameter color:            The new color that will be described by the string.
+     - parameter forSearchResults: A SearchResults object containing the ranges for text to replace.
+     
+     - returns: A String object containing code how to create the color.
+     */
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
         guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
-
+        
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.locale = NSLocale(localeIdentifier: "us")
@@ -71,17 +71,22 @@ class DefaultHSBBuilder: ColorBuilder {
         
         // Change the maximun number of digits for the colour components and then handle the colours.
         
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 0
         
+        
+        let hueValue = Double ( hueColor.hueComponent * 360 )
+        let brightnessValue = Double ( hueColor.brightnessComponent * 100 )
+        let saturationValue = Double ( hueColor.saturationComponent * 100 )
         
         guard
-            let brightnessComponent = convertNumberToString( Double ( hueColor.brightnessComponent ), numberDesc: "brightness component", numberFormatter: numberFormatter ),
-            let saturationComponent = convertNumberToString( Double ( hueColor.saturationComponent ), numberDesc: "saturation component", numberFormatter: numberFormatter ),
-            let hueComponent = convertNumberToString( Double ( hueColor.hueComponent ), numberDesc: "hue component", numberFormatter: numberFormatter ) else {
+            let brightnessComponent = convertNumberToString( brightnessValue, numberDesc: "brightness component", numberFormatter: numberFormatter ),
+            let saturationComponent = convertNumberToString( saturationValue, numberDesc: "saturation component", numberFormatter: numberFormatter ),
+            let hueComponent = convertNumberToString( hueValue, numberDesc: "hue component", numberFormatter: numberFormatter ) else {
                 
                 return nil
         }
-
+        
         
         if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 3, inText: returnString, withReplacementText: brightnessComponent ) {
             returnString = modifiedString
@@ -89,13 +94,13 @@ class DefaultHSBBuilder: ColorBuilder {
             return nil
         }
         
-
+        
         if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: saturationComponent ) {
             returnString = modifiedString
         } else {
             return nil
         }
-
+        
         
         if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: hueComponent ) {
             returnString = modifiedString

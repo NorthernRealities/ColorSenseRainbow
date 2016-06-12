@@ -21,17 +21,27 @@ class RainbowHexStringBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
 
-        var returnString = ""
-        
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
-
         
+        
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.locale = NSLocale(localeIdentifier: "us")
+        
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
+        numberFormatter.minimumFractionDigits = 1
+        numberFormatter.decimalSeparator = "."
+        
+        
+        guard let alphaComponent = convertNumberToString( Double ( color.alphaComponent ), numberDesc: "alpha component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+        
+
         if ( forSearchResult.tcr.numberOfRanges == 3 ) {
-            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: "\(color.alphaComponent)" ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: alphaComponent ) {
                 returnString = modifiedString
             } else {
                 return nil
@@ -41,7 +51,7 @@ class RainbowHexStringBuilder: ColorBuilder {
             // the " that the string has at the end before we append the alpha component.
             
             var replacementString = forSearchResult.capturedStrings[1]
-            replacementString += "\", alpha: \(color.alphaComponent)"
+            replacementString += "\", alpha: " + alphaComponent
             
             
             let fakeTCR : NSTextCheckingResult = forSearchResult.tcr.copy() as! NSTextCheckingResult

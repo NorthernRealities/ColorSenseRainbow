@@ -1534,13 +1534,16 @@ class PredefinedColorSeeker : Seeker {
         super.init()
         
         var error : NSError?
-
+        
+        var regex: NSRegularExpression?
+        
         
         // Swift color with predefined name and alpha value specified
         
-    var regex: NSRegularExpression?
+        let commonSwiftRegex = "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*"
+        
         do {
-            regex = try NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\(\\s*alpha:\\s*([01]\\.?[0-9]*)\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: commonSwiftRegex + "alpha:\\s*" + swiftAlphaConst + "\\s*\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -1556,7 +1559,7 @@ class PredefinedColorSeeker : Seeker {
         do {
             // Swift color with predefined name and no alpha
         
-            regex = try NSRegularExpression ( pattern: "(NS|UI)Color\\.([a-z0-9][A-Za-z0-9]+)Color\\s*\\(\\s*\\)", options: [])
+            regex = try NSRegularExpression ( pattern: commonSwiftRegex + "\\)", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -1569,10 +1572,14 @@ class PredefinedColorSeeker : Seeker {
         }
         
         
+        // Objective-C
+        
+        let commonObjCRegex = "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)Color"
+        
         do {
             // Objective-C color with predefined name with alpha
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)ColorWithAlpha:\\s*([01]\\.[0-9]+)\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: commonObjCRegex + "WithAlpha:\\s*" + objcAlphaConst + "\\s*\\]", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil
@@ -1588,7 +1595,7 @@ class PredefinedColorSeeker : Seeker {
         do {
             // Objective-C color with predefined name and no alpha
         
-            regex = try NSRegularExpression ( pattern: "\\[\\s*(NS|UI)Color\\s*([a-z0-9][A-Za-z0-9]+)Color\\s*\\]", options: [])
+            regex = try NSRegularExpression ( pattern: commonObjCRegex + "\\s*\\]", options: [])
         } catch let error1 as NSError {
             error = error1
             regex = nil

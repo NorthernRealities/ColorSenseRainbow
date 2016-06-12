@@ -21,64 +21,68 @@ class DefaultWhiteBuilder: ColorBuilder {
     
     override func stringForColor( color : NSColor, forSearchResult : SearchResult ) -> String? {
         
-        var returnString = ""
-        
-        if let unwrappedString = forSearchResult.capturedStrings.first {
-            returnString = unwrappedString
-        } else {
+        guard var returnString = forSearchResult.capturedStrings.first else {
             return nil
         }
+        
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.locale = NSLocale(localeIdentifier: "us")
         
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        numberFormatter.maximumFractionDigits = ColorBuilder.maximumFractionDigits
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumAlphaFractionDigits
         numberFormatter.minimumFractionDigits = 1
         numberFormatter.decimalSeparator = "."
         
         
         // First thing to do is to convert the color to the Calibrated White ColorSpace.
         
-        if let whiteColor = color.colorUsingColorSpace( NSColorSpace.genericGrayColorSpace() ) {
-            
-            // While it always has an alpha component there may be an extension at a later date that
-            // removes it so keep this in there.  It doesn't hurt.
-            
-            if ( forSearchResult.tcr.numberOfRanges == 3 ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: "\(whiteColor.alphaComponent)" ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else if ( whiteColor.alphaComponent < 1.0 ) {
-                // User has changed the alpha so we need to add it to the code.
-                
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: forSearchResult.capturedStrings[2] + ", alpha: \(whiteColor.alphaComponent)" ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            }
-            
-            
-            if let component = numberFormatter.stringFromNumber( Double ( whiteColor.whiteComponent ) ) {
-                if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: component ) {
-                    returnString = modifiedString
-                } else {
-                    return nil
-                }
-            } else {
-                print ( "Error converting white component with value of \(whiteColor.whiteComponent) to a string." )
-                return nil
-            }
-            
-            
-            return returnString
+        guard let whiteColor = color.colorUsingColorSpace( NSColorSpace.genericGrayColorSpace() ) else {
+            print ( "Error converting the color to calibrated white colorspace." )
+            return nil
         }
         
-        print ( "Error converting the color to calibrated white colorspace." )
-        return nil
+        
+        // While it always has an alpha component there may be an extension at a later date that
+        // removes it so keep this in there.  It doesn't hurt.
+        
+        guard let alphaComponent = convertNumberToString( Double ( whiteColor.alphaComponent ), numberDesc: "alpha component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+
+        if ( forSearchResult.tcr.numberOfRanges == 3 ) {
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: alphaComponent ) {
+                returnString = modifiedString
+            } else {
+                return nil
+            }
+        } else if ( whiteColor.alphaComponent < 1.0 ) {
+            // User has changed the alpha so we need to add it to the code.
+            
+            if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 2, inText: returnString, withReplacementText: forSearchResult.capturedStrings[2] + ", alpha: " + alphaComponent ) {
+                returnString = modifiedString
+            } else {
+                return nil
+            }
+        }
+        
+
+        // Change the maximun number of digits for the colour components and then handle the white component.
+        
+        numberFormatter.maximumFractionDigits = ColorBuilder.maximumColorFractionDigits
+
+        guard let whiteComponent = convertNumberToString( Double ( whiteColor.whiteComponent ), numberDesc: "white component", numberFormatter: numberFormatter ) else {
+            return nil
+        }
+
+        if let modifiedString = processCaptureGroupInSearchResult( forSearchResult, forRangeAtIndex: 1, inText: returnString, withReplacementText: whiteComponent ) {
+            returnString = modifiedString
+        } else {
+            return nil
+        }
+        
+        
+        return returnString
         
     }
 

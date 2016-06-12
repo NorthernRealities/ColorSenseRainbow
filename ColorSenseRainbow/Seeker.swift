@@ -13,6 +13,44 @@ class Seeker {
     var regexes : [NSRegularExpression] = []
     
     
+    // Constants that define how numbers will be searched for in regular expressions. Define them once here so that if they need to be changed then it only needs to be done once instead of in all of the Seeker subclasses.  If a definition is only used in one subclass then define it there to minimize the memory required but make a note here that the subclass has at least one. That way if something changes it won't be missed.
+ 
+    // Defines how the alpha component of the colour is specified for floating point values between 0 and 1 inclusive.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453
+    
+    let swiftAlphaConst = "([01]|[01]\\.[0-9]+)"
+
+    
+    // Defines how the RGB component of the colour is specified for floating point values between 0 and 1 inclusive. It's defined separately in case it needs to be different in the future.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453
+    
+    let swiftFloatColourConst = "([01]|[01]\\.[0-9]+)"
+    
+    
+    // Declares the optional use of the init function call
+    
+    let swiftInit = "(?:\\.init)?"
+    
+
+    // Defines how the alpha component of the colour is specified for floating point values between 0 and 1 inclusive.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453; 0f
+    
+    let objcAlphaConst = "([01]|[01]?\\.[0-9]+)(?:f|\\.f)?"
+    
+   
+    // Defines how the RGB component of the colour is specified for floating point values between 0 and 1 inclusive. It's defined separately in case it needs to be different in the future.
+    // Valid values: 0; 1; 0.0; 1.0; 0.9; 0.25; 0.97453
+
+    let objcFloatColourConst = "([01]|[01]?\\.[0-9]+)(?:f|\\.f)?"
+
+    
+    // swiftRBGComponentConst - Defined in RGBCalculatedSeeker.swift
+    // swiftHSBComponentConst - Defined in RainbowHSBSeeker.swift
+    // rainbowIntColourConst - Defined in RainbowIntSeeker.swift
+    // objcRBGComponentConst - Defined in RGBCalculatedSeeker.swift
+
+    
+    
     /**
     Look for an object of color being created in the line of text being passed in using regular expressions.  If found it returns back an object of NSColor and the location in the line where the text occurs.
     
